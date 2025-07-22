@@ -1,5 +1,6 @@
 flask
 streamlit
 transformers
+python-dotenv
 torch
 python-telegram-bot
