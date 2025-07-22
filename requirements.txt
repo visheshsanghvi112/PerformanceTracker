@@ -2,3 +2,4 @@ flask
 streamlit
 transformers
 torch
+python-telegram-bot
