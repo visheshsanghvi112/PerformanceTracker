@@ -1,0 +1,121 @@
+# 🔐 SENSITIVE CREDENTIALS - NEVER COMMIT
+*.json
+!requirements.json
+yugrow-dd1d5-*.json
+service-account*.json
+credentials*.json
+*.key
+*.pem
+
+# 🔑 ENVIRONMENT & CONFIG FILES
+.env
+.env.local
+.env.production
+.env.staging
+config.ini
+settings.ini
+
+# 🐍 PYTHON CACHE & BYTECODE
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 🌍 VIRTUAL ENVIRONMENTS
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.virtualenv/
+
+# 📊 DATA & LOGS
+data/*.log
+data/*.db
+data/*.sqlite
+data/*.csv
+data/bot.log*
+data/user_company_mapping.json
+logs/
+*.log
+
+# 🔧 IDE & EDITOR FILES
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 📦 NODE MODULES (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🧪 TESTING & COVERAGE
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# 📋 BACKUP FILES
+backup_*/
+*.backup
+*.bak
+*.old
+
+# 🚀 DEPLOYMENT
+.serverless/
+.terraform/
+
+# 📱 OS GENERATED FILES
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 🎯 PROJECT SPECIFIC
+templates/
+static/
+app.py
+nlp_parser.py
+*.html
+*.css
+
+# 📈 ANALYTICS & REPORTS
+analytics_demo.py
+create_sample_data.py
+multi_user_check.py
+FUNCTIONAL_BOT_ANALYSIS_REPORT.md
+INPUT_HANDLING_SOLUTION.md
+INTEGRATION_CHECK.md
+LOGGING_GUIDE.md
+ANALYTICS_QUICK_GUIDE.md

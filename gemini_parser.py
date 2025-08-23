@@ -1,7 +1,7 @@
 # gemini_parser.py
 
 """
-This module uses Google Gemini (via the gemini-pro model)
+This module uses Google Gemini (via the gemini-2.5-flash model)
 to extract structured JSON from natural language updates
 sent by field staff in Telegram.
 """
@@ -36,18 +36,29 @@ Extract values for the following schema:
 {{
   "client": "Name of the pharmacy or vendor, e.g. Apollo Pharmacy",
   "location": "Area of sale/purchase, e.g. Chembur",
-  "orders": Number of items (e.g. 3),
+  "orders": Number of total items/units (e.g. 8 if '3 boxes + 5 bottles'),
   "amount": Numeric value of amount in INR (e.g. ₹24000), strip currency and commas,
   "remarks": Exact text from user (no paraphrasing)
 }}
 
 ---
-📌 RULES:
+📌 IMPORTANT RULES:
 1. Respond ONLY with the JSON. No text before/after.
 2. If a field is missing, assign `null`.
 3. Do NOT assume. Only extract what's mentioned.
 4. Format numbers properly (e.g., ₹24,000 → 24000).
-5. No code blocks, markdown, or explanation. Just clean JSON.
+5. For ORDERS: If multiple items mentioned (e.g., "3 boxes + 5 bottles"), sum them up to single number (8).
+6. For ORDERS: If unclear quantities like "some tablets", use `null`.
+7. No code blocks, markdown, or explanation. Just clean JSON.
+
+---
+💡 EXAMPLES:
+Input: "Sold 3 boxes of paracetamol and 5 bottles of syrup to Apollo for ₹25000"
+Output: {{"client": "Apollo", "location": null, "orders": 8, "amount": 25000, "remarks": "Sold 3 boxes of paracetamol and 5 bottles of syrup to Apollo for ₹25000"}}
+
+Input: "Client: XYZ Hospital, Location: Mumbai, Orders: 10 tablets + 5 injections, Amount: ₹15000, Remarks: urgent delivery"
+Output: {{"client": "XYZ Hospital", "location": "Mumbai", "orders": 15, "amount": 15000, "remarks": "urgent delivery"}}
+```
 
 ---
 ✉️ Message:
