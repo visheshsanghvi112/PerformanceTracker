@@ -53,11 +53,10 @@ data/*.log
 data/*.db
 data/*.sqlite
 data/*.csv
-data/bot.log*
+data/location_data.json
+data/live_position_data.json
 data/user_company_mapping.json
-logs/
-*.log
-
+ 
 # 🔧 IDE & EDITOR FILES
 .vscode/
 .idea/
