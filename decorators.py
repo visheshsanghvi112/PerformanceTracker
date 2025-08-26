@@ -193,6 +193,20 @@ def rate_limit(calls_per_minute: int = 10):
                 # Remove calls older than 1 minute
                 user_calls = [call_time for call_time in user_calls if current_time - call_time < 60]
                 
+                # Clean up empty entries and very old users (memory leak fix)
+                if not user_calls:
+                    call_times.pop(user_id, None)
+                else:
+                    call_times[user_id] = user_calls
+                
+                # Periodic cleanup: remove very old entries to prevent memory leaks
+                if len(call_times) > 1000:  # Cleanup when too many users tracked
+                    old_threshold = current_time - 3600  # 1 hour ago
+                    call_times = {
+                        uid: calls for uid, calls in call_times.items() 
+                        if calls and max(calls) > old_threshold
+                    }
+                
                 if len(user_calls) >= calls_per_minute:
                     logger.warning(f"Rate limit exceeded for user {user_id}")
                     # Try to send rate limit message

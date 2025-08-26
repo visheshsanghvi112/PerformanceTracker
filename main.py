@@ -72,14 +72,23 @@ def check_system_health():
         # Don't return False here as the bot can still work with limited functionality
     
     # Check if required files exist
+    from config import GOOGLE_SHEETS_CREDENTIALS
     required_files = [
-        'yugrow-dd1d5-010a6b203565.json',  # Google Sheets credentials
+        GOOGLE_SHEETS_CREDENTIALS,  # Google Sheets credentials (from config)
         '.env'  # Environment variables
     ]
     
     for file in required_files:
         if not os.path.exists(file):
             logger.warning(f"⚠️ Required file missing: {file}")
+        else:
+            # Validate file is readable
+            try:
+                with open(file, 'r') as f:
+                    pass  # Just check if we can open it
+                logger.debug(f"✅ File {file} is accessible")
+            except Exception as e:
+                logger.error(f"❌ File {file} exists but is not readable: {e}")
     
     logger.info("✅ System health check completed")
     return True
@@ -90,7 +99,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     logger.error(f"Exception while handling an update: {context.error}")
     
     # Try to notify the user if possible
-    if isinstance(update, type(update)) and hasattr(update, 'effective_chat'):
+    if update and hasattr(update, 'effective_chat') and update.effective_chat:
         try:
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,

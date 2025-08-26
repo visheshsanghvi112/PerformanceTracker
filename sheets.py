@@ -5,8 +5,9 @@ from logger import logger
 
 # Google Sheets setup with error handling
 try:
+    from config import GOOGLE_SHEETS_CREDENTIALS
     SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    CREDS = ServiceAccountCredentials.from_json_keyfile_name('yugrow-dd1d5-6676a7b2d2ea.json', SCOPE)
+    CREDS = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_SHEETS_CREDENTIALS, SCOPE)
     CLIENT = gspread.authorize(CREDS)
     SHEET = CLIENT.open('bot').sheet1
     logger.info("✅ Legacy sheets.py connected to Google Sheets")

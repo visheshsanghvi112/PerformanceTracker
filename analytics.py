@@ -71,7 +71,9 @@ class AdvancedAnalytics:
                 df = df[df[user_col].astype(str) == str(user_id)]
                 logger.info(f"🔒 Filtered to {len(df)} records for user {user_id}")
             else:
-                logger.warning(f"⚠️ No user_id column found - showing all data (PRIVACY RISK!)")
+                logger.error(f"🚨 CRITICAL PRIVACY VIOLATION: No user_id column found - cannot filter data for user {user_id}")
+                # Return empty DataFrame instead of all data to prevent privacy breach
+                return pd.DataFrame()
             
             # Clean and normalize data
             df = self._clean_and_normalize_data(df)
@@ -94,18 +96,22 @@ class AdvancedAnalytics:
             if 'date' in df.columns:
                 df['date'] = pd.to_datetime(df['date'], errors='coerce')
             
-            # Convert numeric columns
-            for col in ['amount', 'orders']:
+            # Convert numeric columns efficiently
+            numeric_cols = ['amount', 'orders']
+            for col in numeric_cols:
                 if col in df.columns:
                     df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
             
-            # Clean text columns
-            for col in ['client', 'location', 'type', 'remarks']:
+            # Clean text columns efficiently
+            text_cols = ['client', 'location', 'type', 'remarks']
+            for col in text_cols:
                 if col in df.columns:
                     df[col] = df[col].astype(str).str.strip()
             
-            # Add calculated columns
+            # Add calculated columns with proper division by zero handling
             df['revenue_per_order'] = df['amount'] / df['orders'].replace(0, 1)
+            # Set revenue_per_order to 0 where orders was originally 0
+            df.loc[df['orders'] == 0, 'revenue_per_order'] = 0
             df['month'] = df['date'].dt.to_period('M') if 'date' in df.columns else None
             df['weekday'] = df['date'].dt.day_name() if 'date' in df.columns else None
             df['hour'] = df['date'].dt.hour if 'date' in df.columns else None

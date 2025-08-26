@@ -107,12 +107,11 @@ class ErrorHandler:
         
         # Store error in context for potential retry
         if context and hasattr(context, 'user_data'):
+            from datetime import datetime
             context.user_data['last_error'] = {
                 'type': error_type.value,
                 'message': str(error),
-                'timestamp': logger.handlers[0].formatter.formatTime(logger.makeRecord(
-                    'error', 40, '', 0, '', (), None
-                ))
+                'timestamp': datetime.now().isoformat()
             }
         
         # Notify user if update is available
@@ -140,14 +139,13 @@ class ErrorHandler:
         """Create a detailed error report for debugging"""
         error_type = cls.classify_error(error)
         
+        from datetime import datetime
         report = {
             'error_type': error_type.value,
             'error_message': str(error),
             'error_class': error.__class__.__name__,
             'traceback': traceback.format_exc(),
-            'timestamp': logger.handlers[0].formatter.formatTime(logger.makeRecord(
-                'error', 40, '', 0, '', (), None
-            ))
+            'timestamp': datetime.now().isoformat()
         }
         
         if context_data:
