@@ -237,21 +237,62 @@ class MultiCompanySheetManager:
             return []
     
     def get_company_stats(self, company_key: str) -> Dict:
-        """📈 Get basic stats for a company"""
+        """📈 Get basic stats for a company with safe numeric conversion"""
         try:
             records = self.get_company_records(company_key)
             
             if not records:
-                return {"total_records": 0, "total_users": 0, "total_revenue": 0}
+                return {
+                    "total_records": 0, 
+                    "total_users": 0, 
+                    "total_revenue": 0.0,
+                    "date_range": "No data"
+                }
             
             import pandas as pd
             df = pd.DataFrame(records)
             
+            # Safe numeric conversion for revenue
+            total_revenue = 0.0
+            if 'Amount' in df.columns:
+                for amount_value in df['Amount']:
+                    try:
+                        # Handle different amount formats
+                        if isinstance(amount_value, (int, float)):
+                            total_revenue += float(amount_value)
+                        elif isinstance(amount_value, str):
+                            # Clean string values (remove ₹, commas, etc.)
+                            clean_amount = str(amount_value).replace('₹', '').replace(',', '').strip()
+                            if clean_amount and clean_amount != 'nan':
+                                total_revenue += float(clean_amount)
+                    except (ValueError, TypeError) as e:
+                        logger.warning(f"⚠️ Could not convert amount '{amount_value}' to number: {e}")
+                        continue
+            
+            # Safe user count
+            total_users = 0
+            if 'User ID' in df.columns:
+                try:
+                    total_users = df['User ID'].nunique()
+                except Exception as e:
+                    logger.warning(f"⚠️ Could not count unique users: {e}")
+                    total_users = len(df['User ID'].dropna()) if 'User ID' in df.columns else 0
+            
+            # Safe date range
+            date_range = "No dates"
+            if 'Date' in df.columns:
+                try:
+                    valid_dates = df['Date'].dropna()
+                    if len(valid_dates) > 0:
+                        date_range = f"{valid_dates.min()} to {valid_dates.max()}"
+                except Exception as e:
+                    logger.warning(f"⚠️ Could not determine date range: {e}")
+            
             stats = {
                 "total_records": len(df),
-                "total_users": df['User ID'].nunique() if 'User ID' in df.columns else 0,
-                "total_revenue": df['Amount'].sum() if 'Amount' in df.columns else 0,
-                "date_range": f"{df['Date'].min()} to {df['Date'].max()}" if 'Date' in df.columns else "No dates"
+                "total_users": total_users,
+                "total_revenue": total_revenue,
+                "date_range": date_range
             }
             
             logger.info(f"📈 Stats for {company_key}: {stats}")
@@ -259,7 +300,13 @@ class MultiCompanySheetManager:
             
         except Exception as e:
             logger.error(f"❌ Failed to get stats for {company_key}: {e}")
-            return {"error": str(e)}
+            return {
+                "error": str(e),
+                "total_records": 0,
+                "total_users": 0, 
+                "total_revenue": 0.0,
+                "date_range": "Error retrieving data"
+            }
 
 
 # Create global instance

@@ -25,7 +25,9 @@ from commands import (
     predictions_command,
     charts_command,
     analytics_help_command,
-    top_performers_command
+    top_performers_command,
+    location_analytics_command,
+    ai_help_command
 )
 
 # 🏢 Company management commands
@@ -37,6 +39,24 @@ from company_commands import (
     admin_stats_command,
     admin_assign_command,
     admin_remove_command
+)
+
+# 📍 Location management commands
+from location_commands import (
+    location_command,
+    location_status_command,
+    location_clear_command,
+    handle_location_message
+)
+
+# 📍 Live position management commands
+from live_position_commands import (
+    position_command,
+    position_status_command,
+    position_clear_command,
+    position_update_command,
+    position_analytics_command,
+    handle_live_position_message
 )
 
 # ✅ Message handler for free text entries
@@ -129,6 +149,11 @@ def main():
         application.add_handler(CommandHandler("charts", charts_command))
         application.add_handler(CommandHandler("analytics", analytics_help_command))
         application.add_handler(CommandHandler("top", top_performers_command))
+        application.add_handler(CommandHandler("location_analytics", location_analytics_command))
+        
+        # 🤖 AI Help and utility commands
+        application.add_handler(CommandHandler("ai_help", ai_help_command))
+        application.add_handler(CommandHandler("ai", ai_help_command))
         
         # 🔍 Analytics aliases for easier access
         application.add_handler(CommandHandler("forecast", predictions_command))
@@ -142,6 +167,21 @@ def main():
         application.add_handler(CommandHandler("admin_stats", admin_stats_command))
         application.add_handler(CommandHandler("admin_assign", admin_assign_command))
         application.add_handler(CommandHandler("admin_remove", admin_remove_command))
+
+        # 📍 GPS Location Commands
+        application.add_handler(CommandHandler("location", location_command))
+        application.add_handler(CommandHandler("location_status", location_status_command))
+        application.add_handler(CommandHandler("location_clear", location_clear_command))
+        
+        # 📍 Live Position Commands (SEPARATE from location commands)
+        application.add_handler(CommandHandler("position", position_command))
+        application.add_handler(CommandHandler("position_status", position_status_command))
+        application.add_handler(CommandHandler("position_clear", position_clear_command))
+        application.add_handler(CommandHandler("position_update", position_update_command))
+        application.add_handler(CommandHandler("position_analytics", position_analytics_command))
+        
+        # 📍 Location message handler (for GPS coordinates - handles both location and live position)
+        application.add_handler(MessageHandler(filters.LOCATION, handle_location_message))
 
         # 🎛 Interactive menu handlers
         application.add_handler(CallbackQueryHandler(handle_company_callback, pattern=r"^(register_company_|switch_company_|company_info_|close_menu)"))

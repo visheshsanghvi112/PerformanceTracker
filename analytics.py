@@ -196,6 +196,405 @@ class AdvancedAnalytics:
         logger.info("✅ Executive dashboard generated successfully")
         return dashboard
     
+    def generate_location_analytics(self, user_id: int) -> Dict[str, Any]:
+        """📍 Generate comprehensive location-based analytics for specific user"""
+        df = self.load_fresh_data(user_id)
+        
+        if df.empty:
+            return {"error": "No data available for location analytics"}
+        
+        logger.info(f"📍 Generating location analytics for user {user_id}...")
+        
+        try:
+            # Extract GPS coordinates from location field
+            df_with_gps = self._extract_gps_data(df)
+            
+            # Territory performance analysis
+            territory_stats = self._analyze_territory_performance(df_with_gps)
+            
+            # Location efficiency metrics
+            location_efficiency = self._calculate_detailed_location_efficiency(df_with_gps)
+            
+            # Geographic distribution analysis
+            geographic_distribution = self._analyze_geographic_distribution(df_with_gps)
+            
+            # Route optimization suggestions
+            route_insights = self._generate_route_insights(df_with_gps)
+            
+            # Location-based trends
+            location_trends = self._analyze_location_trends(df_with_gps)
+            
+            analytics = {
+                "period": f"{df['date'].min().strftime('%Y-%m-%d')} to {df['date'].max().strftime('%Y-%m-%d')}" if 'date' in df.columns and not df['date'].isna().all() else "Date range not available",
+                "territory_performance": territory_stats,
+                "location_efficiency": location_efficiency,
+                "geographic_distribution": geographic_distribution,
+                "route_optimization": route_insights,
+                "location_trends": location_trends,
+                "gps_coverage": {
+                    "total_entries": len(df),
+                    "gps_enhanced_entries": len(df_with_gps[df_with_gps['has_gps'] == True]),
+                    "coverage_percentage": (len(df_with_gps[df_with_gps['has_gps'] == True]) / len(df) * 100) if len(df) > 0 else 0
+                },
+                "generated_at": datetime.now().isoformat()
+            }
+            
+            logger.info("✅ Location analytics generated successfully")
+            return analytics
+            
+        except Exception as e:
+            logger.error(f"❌ Location analytics generation failed for user {user_id}: {e}")
+            return {"error": f"Failed to generate location analytics: {str(e)}"}
+    
+    def _extract_gps_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """📍 Extract GPS coordinates from location field"""
+        try:
+            df_copy = df.copy()
+            df_copy['has_gps'] = False
+            df_copy['gps_latitude'] = None
+            df_copy['gps_longitude'] = None
+            df_copy['base_location'] = df_copy['location']
+            
+            # Extract GPS coordinates from location field (format: "Location (GPS: lat, lon)")
+            gps_pattern = r'GPS:\s*(-?\d+\.?\d*),\s*(-?\d+\.?\d*)'
+            
+            for idx, row in df_copy.iterrows():
+                location_str = str(row['location'])
+                
+                # Check if location contains GPS data
+                if 'GPS:' in location_str:
+                    import re
+                    match = re.search(gps_pattern, location_str)
+                    if match:
+                        df_copy.at[idx, 'has_gps'] = True
+                        df_copy.at[idx, 'gps_latitude'] = float(match.group(1))
+                        df_copy.at[idx, 'gps_longitude'] = float(match.group(2))
+                        
+                        # Extract base location (remove GPS part)
+                        base_location = location_str.split(' (GPS:')[0].strip()
+                        df_copy.at[idx, 'base_location'] = base_location
+            
+            logger.debug(f"📍 GPS extraction: {df_copy['has_gps'].sum()} entries with GPS out of {len(df_copy)}")
+            return df_copy
+            
+        except Exception as e:
+            logger.error(f"❌ GPS data extraction failed: {e}")
+            df['has_gps'] = False
+            df['base_location'] = df['location']
+            return df
+    
+    def _analyze_territory_performance(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """🗺️ Analyze performance by territory/location"""
+        try:
+            # Group by base location for territory analysis
+            territory_stats = df.groupby('base_location').agg({
+                'amount': ['sum', 'mean', 'count'],
+                'orders': 'sum',
+                'client': 'nunique'
+            }).round(2)
+            
+            # Flatten column names
+            territory_stats.columns = ['total_revenue', 'avg_revenue', 'visit_count', 'total_orders', 'unique_clients']
+            
+            # Calculate efficiency metrics
+            territory_stats['revenue_per_visit'] = territory_stats['total_revenue'] / territory_stats['visit_count']
+            territory_stats['orders_per_visit'] = territory_stats['total_orders'] / territory_stats['visit_count']
+            territory_stats['client_density'] = territory_stats['unique_clients'] / territory_stats['visit_count']
+            
+            # Sort by total revenue
+            territory_stats = territory_stats.sort_values('total_revenue', ascending=False)
+            
+            # Convert to dictionary for JSON serialization
+            top_territories = territory_stats.head(10).to_dict('index')
+            
+            # Calculate territory insights
+            total_territories = len(territory_stats)
+            top_territory = territory_stats.index[0] if len(territory_stats) > 0 else "No data"
+            top_territory_revenue = territory_stats.iloc[0]['total_revenue'] if len(territory_stats) > 0 else 0
+            
+            return {
+                "total_territories": total_territories,
+                "top_territory": {
+                    "name": top_territory,
+                    "revenue": f"₹{top_territory_revenue:,.2f}",
+                    "visits": int(territory_stats.iloc[0]['visit_count']) if len(territory_stats) > 0 else 0
+                },
+                "territory_rankings": {
+                    location: {
+                        "revenue": f"₹{stats['total_revenue']:,.2f}",
+                        "visits": int(stats['visit_count']),
+                        "avg_revenue": f"₹{stats['avg_revenue']:,.2f}",
+                        "clients": int(stats['unique_clients']),
+                        "efficiency_score": round(stats['revenue_per_visit'], 2)
+                    }
+                    for location, stats in list(top_territories.items())[:5]
+                },
+                "performance_distribution": {
+                    "high_performers": len(territory_stats[territory_stats['total_revenue'] > territory_stats['total_revenue'].quantile(0.8)]),
+                    "medium_performers": len(territory_stats[(territory_stats['total_revenue'] > territory_stats['total_revenue'].quantile(0.4)) & 
+                                                           (territory_stats['total_revenue'] <= territory_stats['total_revenue'].quantile(0.8))]),
+                    "low_performers": len(territory_stats[territory_stats['total_revenue'] <= territory_stats['total_revenue'].quantile(0.4)])
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Territory performance analysis failed: {e}")
+            return {"error": "Territory analysis failed"}
+    
+    def _calculate_detailed_location_efficiency(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """📊 Calculate detailed location efficiency metrics"""
+        try:
+            if df.empty:
+                return {"error": "No data for efficiency calculation"}
+            
+            # Overall efficiency metrics
+            total_locations = df['base_location'].nunique()
+            total_visits = len(df)
+            total_revenue = df['amount'].sum()
+            
+            # GPS-enhanced vs non-GPS entries
+            gps_entries = df[df['has_gps'] == True]
+            non_gps_entries = df[df['has_gps'] == False]
+            
+            gps_efficiency = {
+                "entries": len(gps_entries),
+                "avg_revenue": gps_entries['amount'].mean() if len(gps_entries) > 0 else 0,
+                "avg_orders": gps_entries['orders'].mean() if len(gps_entries) > 0 else 0
+            }
+            
+            non_gps_efficiency = {
+                "entries": len(non_gps_entries),
+                "avg_revenue": non_gps_entries['amount'].mean() if len(non_gps_entries) > 0 else 0,
+                "avg_orders": non_gps_entries['orders'].mean() if len(non_gps_entries) > 0 else 0
+            }
+            
+            # Location concentration analysis
+            location_concentration = df['base_location'].value_counts()
+            top_location_percentage = (location_concentration.iloc[0] / total_visits * 100) if len(location_concentration) > 0 else 0
+            
+            return {
+                "overall_metrics": {
+                    "total_locations": total_locations,
+                    "total_visits": total_visits,
+                    "avg_revenue_per_location": f"₹{total_revenue / total_locations:.2f}" if total_locations > 0 else "₹0",
+                    "avg_visits_per_location": round(total_visits / total_locations, 2) if total_locations > 0 else 0
+                },
+                "gps_vs_manual": {
+                    "gps_enhanced": {
+                        "count": gps_efficiency["entries"],
+                        "avg_revenue": f"₹{gps_efficiency['avg_revenue']:.2f}",
+                        "avg_orders": round(gps_efficiency["avg_orders"], 2)
+                    },
+                    "manual_entry": {
+                        "count": non_gps_efficiency["entries"],
+                        "avg_revenue": f"₹{non_gps_efficiency['avg_revenue']:.2f}",
+                        "avg_orders": round(non_gps_efficiency["avg_orders"], 2)
+                    },
+                    "gps_advantage": {
+                        "revenue_boost": f"{((gps_efficiency['avg_revenue'] - non_gps_efficiency['avg_revenue']) / non_gps_efficiency['avg_revenue'] * 100):.1f}%" if non_gps_efficiency['avg_revenue'] > 0 else "N/A",
+                        "order_boost": f"{((gps_efficiency['avg_orders'] - non_gps_efficiency['avg_orders']) / non_gps_efficiency['avg_orders'] * 100):.1f}%" if non_gps_efficiency['avg_orders'] > 0 else "N/A"
+                    }
+                },
+                "location_concentration": {
+                    "most_visited_location": location_concentration.index[0] if len(location_concentration) > 0 else "No data",
+                    "visit_percentage": f"{top_location_percentage:.1f}%",
+                    "location_diversity_score": round(1 - (top_location_percentage / 100), 2)
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Location efficiency calculation failed: {e}")
+            return {"error": "Efficiency calculation failed"}
+    
+    def _analyze_geographic_distribution(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """🌍 Analyze geographic distribution of sales"""
+        try:
+            gps_data = df[df['has_gps'] == True]
+            
+            if gps_data.empty:
+                return {
+                    "status": "no_gps_data",
+                    "message": "No GPS data available for geographic analysis",
+                    "recommendation": "Share your location during sales entries to unlock geographic insights"
+                }
+            
+            # Calculate geographic spread
+            lat_range = gps_data['gps_latitude'].max() - gps_data['gps_latitude'].min()
+            lon_range = gps_data['gps_longitude'].max() - gps_data['gps_longitude'].min()
+            
+            # Calculate center point
+            center_lat = gps_data['gps_latitude'].mean()
+            center_lon = gps_data['gps_longitude'].mean()
+            
+            # Calculate distances from center (approximate)
+            gps_data_copy = gps_data.copy()
+            gps_data_copy['distance_from_center'] = np.sqrt(
+                (gps_data_copy['gps_latitude'] - center_lat) ** 2 + 
+                (gps_data_copy['gps_longitude'] - center_lon) ** 2
+            ) * 111  # Rough conversion to kilometers
+            
+            # Geographic performance zones
+            gps_data_copy['zone'] = pd.cut(gps_data_copy['distance_from_center'], 
+                                         bins=3, labels=['Core', 'Extended', 'Remote'])
+            
+            zone_performance = gps_data_copy.groupby('zone').agg({
+                'amount': ['sum', 'mean', 'count'],
+                'orders': 'sum'
+            }).round(2)
+            
+            return {
+                "status": "success",
+                "coverage_area": {
+                    "latitude_range": f"{lat_range:.4f}°",
+                    "longitude_range": f"{lon_range:.4f}°",
+                    "approximate_coverage": f"{max(lat_range, lon_range) * 111:.1f} km",
+                    "center_point": f"{center_lat:.4f}, {center_lon:.4f}"
+                },
+                "performance_zones": {
+                    zone: {
+                        "total_revenue": f"₹{stats[('amount', 'sum')]:,.2f}",
+                        "avg_revenue": f"₹{stats[('amount', 'mean')]:,.2f}",
+                        "visit_count": int(stats[('amount', 'count')]),
+                        "total_orders": int(stats[('orders', 'sum')])
+                    }
+                    for zone, stats in zone_performance.iterrows()
+                },
+                "geographic_insights": {
+                    "most_active_zone": zone_performance[('amount', 'count')].idxmax(),
+                    "highest_revenue_zone": zone_performance[('amount', 'sum')].idxmax(),
+                    "coverage_efficiency": f"{len(gps_data) / (lat_range * lon_range * 10000):.2f}" if lat_range * lon_range > 0 else "N/A"
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Geographic distribution analysis failed: {e}")
+            return {"error": "Geographic analysis failed"}
+    
+    def _generate_route_insights(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """🛣️ Generate route optimization insights"""
+        try:
+            gps_data = df[df['has_gps'] == True]
+            
+            if len(gps_data) < 2:
+                return {
+                    "status": "insufficient_data",
+                    "message": "Need at least 2 GPS locations for route analysis",
+                    "recommendation": "Continue sharing locations to unlock route optimization"
+                }
+            
+            # Sort by date to analyze route patterns
+            if 'date' in gps_data.columns:
+                gps_data = gps_data.sort_values('date')
+            
+            # Calculate distances between consecutive visits
+            distances = []
+            for i in range(1, len(gps_data)):
+                lat1, lon1 = gps_data.iloc[i-1]['gps_latitude'], gps_data.iloc[i-1]['gps_longitude']
+                lat2, lon2 = gps_data.iloc[i]['gps_latitude'], gps_data.iloc[i]['gps_longitude']
+                
+                # Haversine distance approximation
+                distance = np.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2) * 111  # km
+                distances.append(distance)
+            
+            if distances:
+                avg_distance = np.mean(distances)
+                total_distance = sum(distances)
+                
+                # Identify potential route optimizations
+                long_distances = [d for d in distances if d > avg_distance * 1.5]
+                optimization_potential = len(long_distances) / len(distances) * 100 if distances else 0
+                
+                return {
+                    "status": "success",
+                    "route_metrics": {
+                        "total_distance_covered": f"{total_distance:.1f} km",
+                        "average_distance_between_visits": f"{avg_distance:.1f} km",
+                        "longest_single_distance": f"{max(distances):.1f} km",
+                        "shortest_single_distance": f"{min(distances):.1f} km"
+                    },
+                    "optimization_insights": {
+                        "optimization_potential": f"{optimization_potential:.1f}%",
+                        "long_distance_visits": len(long_distances),
+                        "efficiency_score": max(0, 100 - optimization_potential),
+                        "recommendation": "Consider clustering visits by geographic proximity" if optimization_potential > 30 else "Route efficiency looks good"
+                    },
+                    "visit_patterns": {
+                        "total_gps_visits": len(gps_data),
+                        "unique_gps_locations": gps_data[['gps_latitude', 'gps_longitude']].drop_duplicates().shape[0],
+                        "location_revisit_rate": f"{(1 - gps_data[['gps_latitude', 'gps_longitude']].drop_duplicates().shape[0] / len(gps_data)) * 100:.1f}%"
+                    }
+                }
+            else:
+                return {"status": "calculation_error", "message": "Could not calculate route metrics"}
+                
+        except Exception as e:
+            logger.error(f"❌ Route insights generation failed: {e}")
+            return {"error": "Route analysis failed"}
+    
+    def _analyze_location_trends(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """📈 Analyze location-based trends over time"""
+        try:
+            if 'date' not in df.columns or df['date'].isna().all():
+                return {"error": "Date information not available for trend analysis"}
+            
+            # Monthly location performance
+            df['month'] = df['date'].dt.to_period('M')
+            monthly_location_stats = df.groupby(['month', 'base_location']).agg({
+                'amount': 'sum',
+                'orders': 'sum'
+            }).reset_index()
+            
+            # Find trending locations
+            location_trends = {}
+            for location in df['base_location'].unique():
+                location_data = monthly_location_stats[monthly_location_stats['base_location'] == location]
+                if len(location_data) >= 2:
+                    # Calculate trend (simple linear regression slope)
+                    x = range(len(location_data))
+                    y = location_data['amount'].values
+                    if len(x) > 1:
+                        slope = np.polyfit(x, y, 1)[0]
+                        location_trends[location] = slope
+            
+            # Sort locations by trend
+            trending_up = {k: v for k, v in sorted(location_trends.items(), key=lambda x: x[1], reverse=True)[:3]}
+            trending_down = {k: v for k, v in sorted(location_trends.items(), key=lambda x: x[1])[:3]}
+            
+            # GPS adoption trend
+            if df['has_gps'].any():
+                gps_adoption = df.groupby(df['date'].dt.to_period('M'))['has_gps'].mean() * 100
+                gps_trend = "increasing" if gps_adoption.iloc[-1] > gps_adoption.iloc[0] else "decreasing" if len(gps_adoption) > 1 else "stable"
+            else:
+                gps_adoption = pd.Series()
+                gps_trend = "no_gps_data"
+            
+            return {
+                "trending_locations": {
+                    "growing": {
+                        location: f"₹{trend:+,.0f}/month" 
+                        for location, trend in trending_up.items()
+                    },
+                    "declining": {
+                        location: f"₹{trend:+,.0f}/month" 
+                        for location, trend in trending_down.items()
+                    }
+                },
+                "gps_adoption": {
+                    "trend": gps_trend,
+                    "current_rate": f"{gps_adoption.iloc[-1]:.1f}%" if len(gps_adoption) > 0 else "0%",
+                    "recommendation": "Continue sharing GPS locations for better insights" if gps_trend != "increasing" else "Great GPS adoption rate!"
+                },
+                "location_stability": {
+                    "consistent_locations": len([loc for loc, trend in location_trends.items() if abs(trend) < 1000]),
+                    "volatile_locations": len([loc for loc, trend in location_trends.items() if abs(trend) >= 1000]),
+                    "stability_score": f"{len([loc for loc, trend in location_trends.items() if abs(trend) < 1000]) / len(location_trends) * 100:.1f}%" if location_trends else "N/A"
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Location trends analysis failed: {e}")
+            return {"error": "Trend analysis failed"}
+
     def generate_predictive_insights(self, user_id: int) -> Dict[str, Any]:
         """🔮 AI-powered predictive analytics for specific user"""
         df = self.load_fresh_data(user_id)

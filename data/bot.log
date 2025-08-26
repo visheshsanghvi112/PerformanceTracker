@@ -1,2 +1,187 @@
 2025-07-21 15:47:13,937 - INFO - Bot is starting...
 2025-07-21 16:04:26,115 - INFO - Bot is starting...
+2025-08-26 15:44:26,211 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-08-26 15:44:26,211 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-08-26 15:44:26,221 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-08-26 15:44:26,221 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-08-26 15:44:26,221 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :67   | 🔍 Processing input: 'Sold 5 medicines to Apollo Pharmacy for ₹15000'
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :83   | ✅ Input passed validation - ready for AI processing
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :67   | 🔍 Processing input: 'asdfghjkl'
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :73   | ❌ Input failed validation: gibberish_detected
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :67   | 🔍 Processing input: 'hello how are you'
+2025-08-26 15:44:26,221 | DEBUG    | process_input       :73   | ❌ Input failed validation: casual_conversation
+2025-08-26 15:44:28,751 | INFO     | __init__            :68   | 🤖 AI Response Engine initialized
+2025-08-26 15:44:29,533 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-08-26 15:44:29,533 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-08-26 15:44:30,181 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-08-26 15:44:30,181 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-08-26 15:44:33,601 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-08-26 15:44:34,061 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-08-26 15:44:34,062 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-08-26 15:44:34,514 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-08-26 15:44:34,971 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-08-26 15:44:35,431 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-08-26 15:44:35,911 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-08-26 15:44:35,924 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-08-26 15:44:37,361 | INFO     | __init__            :35   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-08-26 15:44:37,371 | DEBUG    | process_input       :67   | 🔍 Processing input: 'Sold 5 medicines to Apollo Pharmacy for ₹15000'
+2025-08-26 15:44:37,371 | DEBUG    | process_input       :83   | ✅ Input passed validation - ready for AI processing
+2025-08-26 16:12:19,764 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-08-26 16:12:19,764 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-08-26 16:12:19,764 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-08-26 16:12:19,764 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-08-26 16:12:19,764 | INFO     | __init__            :68   | 🤖 AI Response Engine initialized
+2025-08-26 16:12:19,764 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :67   | 🔍 Processing input: 'Sold 5 tablets to Apollo for ₹25000'
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :83   | ✅ Input passed validation - ready for AI processing
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :67   | 🔍 Processing input: 'asdfghjkl'
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :73   | ❌ Input failed validation: gibberish_detected
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :67   | 🔍 Processing input: 'hello how are you'
+2025-08-26 16:12:19,764 | DEBUG    | process_input       :73   | ❌ Input failed validation: casual_conversation
+2025-08-26 16:12:19,764 | DEBUG    | get_fallback_response:159  | 🔄 Generating fallback response for: 'some unclear text...'
+2025-08-26 16:12:22,614 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-08-26 16:12:22,614 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-08-26 16:12:23,194 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-08-26 16:12:23,204 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-08-26 16:12:25,945 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-08-26 16:12:26,354 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-08-26 16:12:26,354 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-08-26 16:12:26,744 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-08-26 16:12:27,124 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-08-26 16:12:27,514 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-08-26 16:12:27,894 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-08-26 16:12:27,899 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-08-26 16:12:27,908 | INFO     | store_location      :49   | 📍 Location stored for user test_user in company test_company
+2025-08-26 16:12:27,908 | INFO     | get_location        :68   | 📍 Location data expired for user test_user
+2025-08-26 16:12:27,909 | INFO     | clear_location      :96   | 📍 Location cleared for user test_user in company test_company
+2025-08-26 16:12:29,114 | INFO     | __init__            :35   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-08-26 16:12:31,334 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-08-26 17:02:55,533 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-08-26 17:02:55,533 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-08-26 17:02:55,533 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-08-26 17:02:55,533 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-08-26 17:02:55,533 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-08-26 17:02:55,550 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-08-26 17:02:55,550 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-08-26 17:02:56,377 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-08-26 17:02:56,384 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-08-26 17:02:59,247 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-08-26 17:02:59,626 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-08-26 17:02:59,626 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-08-26 17:03:00,005 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-08-26 17:03:00,365 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-08-26 17:03:00,734 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-08-26 17:03:01,116 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-08-26 17:03:01,116 | INFO     | __init__            :68   | 🤖 AI Response Engine initialized
+2025-08-26 17:03:01,127 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-08-26 17:03:01,129 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'change company'
+2025-08-26 17:03:01,130 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'change company'
+2025-08-26 17:03:01,132 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'switch company'
+2025-08-26 17:03:01,134 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'change company'
+2025-08-26 17:03:01,134 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'change company'
+2025-08-26 17:03:01,134 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'different company'
+2025-08-26 17:03:01,139 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'company change'
+2025-08-26 17:03:01,139 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'company switch'
+2025-08-26 17:03:01,139 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'select company'
+2025-08-26 17:03:01,139 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'another company'
+2025-08-26 17:03:01,143 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'new company'
+2025-08-26 17:03:01,143 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'different company'
+2025-08-26 17:03:01,156 | WARNING  | safe_format_revenue :48   | ⚠️ Could not format revenue 'invalid': could not convert string to float: 'invalid'
+2025-08-26 17:03:01,167 | WARNING  | get_company_stats   :269  | ⚠️ Could not convert amount 'invalid' to number: could not convert string to float: 'invalid'
+2025-08-26 17:03:01,174 | INFO     | get_company_stats   :298  | 📈 Stats for test_company: {'total_records': 5, 'total_users': 4, 'total_revenue': 75000.5, 'date_range': '2025-01-22 to 2025-01-25'}
+2025-08-26 17:03:01,177 | ERROR    | switch_user_company :152  | ❌ Invalid user_id: None
+2025-08-26 17:03:01,178 | ERROR    | switch_user_company :152  | ❌ Invalid user_id: invalid
+2025-08-26 17:03:01,179 | ERROR    | switch_user_company :156  | ❌ Invalid company: None
+2025-08-26 17:03:01,179 | ERROR    | switch_user_company :163  | ❌ User 123456 not registered
+2025-08-26 17:03:01,180 | ERROR    | switch_user_company :156  | ❌ Invalid company: 
+2025-08-26 17:03:01,183 | ERROR    | get_company_stats   :302  | ❌ Failed to get stats for test_company: API Error
+2025-08-26 17:03:01,183 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'change company'
+2025-08-26 17:03:01,183 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'switch company'
+2025-08-26 17:03:01,183 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'different company'
+2025-08-26 17:03:01,183 | INFO     | detect_company_switch_intent:48   | 🎯 Company switch intent detected via keyword: 'company change'
+2025-08-26 17:56:41,960 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-08-26 17:56:41,961 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-08-26 17:56:41,961 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-08-26 17:56:41,961 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-08-26 17:56:41,963 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-08-26 17:56:41,963 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-08-26 17:56:42,756 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-08-26 17:56:42,761 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-08-26 17:56:45,802 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-08-26 17:56:46,233 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-08-26 17:56:46,234 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-08-26 17:56:46,650 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-08-26 17:56:47,067 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-08-26 17:56:47,479 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-08-26 17:56:47,853 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-08-26 17:56:48,324 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from johnlee sheet
+2025-08-26 17:56:48,324 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.466 seconds
+2025-08-26 17:56:48,324 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.466 seconds
+2025-08-26 17:56:48,761 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from yugrow sheet
+2025-08-26 17:56:48,761 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.431 seconds
+2025-08-26 17:56:48,762 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.432 seconds
+2025-08-26 17:56:49,215 | INFO     | get_company_records :177  | 📊 Retrieved 0 records from ambica sheet
+2025-08-26 17:56:49,216 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.453 seconds
+2025-08-26 17:56:49,217 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.453 seconds
+2025-08-26 17:56:49,661 | INFO     | get_company_records :177  | 📊 Retrieved 10 records from baker sheet
+2025-08-26 17:56:49,662 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.442 seconds
+2025-08-26 17:56:49,662 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.443 seconds
+2025-08-26 17:56:49,664 | INFO     | add_live_position_column_to_all_sheets:89   | 📊 Adding Live_Position column to 4 company sheets...
+2025-08-26 17:56:49,664 | INFO     | add_live_position_column_to_all_sheets:96   | 🔄 Processing 🏪 JohnLee (johnlee)...
+2025-08-26 17:56:49,665 | INFO     | add_live_position_column_to_sheet:41   | 📊 Adding Live_Position column to johnlee sheet...
+2025-08-26 17:56:50,109 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from johnlee sheet
+2025-08-26 17:56:50,109 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.443 seconds
+2025-08-26 17:56:50,109 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.443 seconds
+2025-08-26 17:56:50,110 | INFO     | add_live_position_column_to_sheet:52   | ✅ Live_Position column already exists in johnlee sheet
+2025-08-26 17:56:50,110 | INFO     | add_live_position_column_to_all_sheets:102  | ✅ 🏪 JohnLee: Live_Position column added successfully
+2025-08-26 17:56:50,111 | INFO     | add_live_position_column_to_all_sheets:96   | 🔄 Processing 💊 Yugrow Pharmacy (yugrow)...
+2025-08-26 17:56:50,111 | INFO     | add_live_position_column_to_sheet:41   | 📊 Adding Live_Position column to yugrow sheet...
+2025-08-26 17:56:50,522 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from yugrow sheet
+2025-08-26 17:56:50,535 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.410 seconds
+2025-08-26 17:56:50,536 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.423 seconds
+2025-08-26 17:56:50,537 | INFO     | add_live_position_column_to_sheet:52   | ✅ Live_Position column already exists in yugrow sheet
+2025-08-26 17:56:50,538 | INFO     | add_live_position_column_to_all_sheets:102  | ✅ 💊 Yugrow Pharmacy: Live_Position column added successfully
+2025-08-26 17:56:50,539 | INFO     | add_live_position_column_to_all_sheets:96   | 🔄 Processing 🏥 Ambica Pharma (ambica)...
+2025-08-26 17:56:50,540 | INFO     | add_live_position_column_to_sheet:41   | 📊 Adding Live_Position column to ambica sheet...
+2025-08-26 17:56:50,963 | INFO     | get_company_records :177  | 📊 Retrieved 0 records from ambica sheet
+2025-08-26 17:56:50,965 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.424 seconds
+2025-08-26 17:56:50,966 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.425 seconds
+2025-08-26 17:56:50,967 | ERROR    | add_live_position_column_to_sheet:74   | ❌ Error adding Live_Position column to ambica: 'MultiCompanySheetManager' object has no attribute 'get_worksheet'
+2025-08-26 17:56:50,968 | ERROR    | add_live_position_column_to_all_sheets:104  | ❌ 🏥 Ambica Pharma: Failed to add Live_Position column
+2025-08-26 17:56:50,970 | INFO     | add_live_position_column_to_all_sheets:96   | 🔄 Processing 🏢 Baker and Davis (baker)...
+2025-08-26 17:56:50,972 | INFO     | add_live_position_column_to_sheet:41   | 📊 Adding Live_Position column to baker sheet...
+2025-08-26 17:56:51,397 | INFO     | get_company_records :177  | 📊 Retrieved 10 records from baker sheet
+2025-08-26 17:56:51,397 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.424 seconds
+2025-08-26 17:56:51,397 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.424 seconds
+2025-08-26 17:56:51,398 | INFO     | add_live_position_column_to_sheet:52   | ✅ Live_Position column already exists in baker sheet
+2025-08-26 17:56:51,398 | INFO     | add_live_position_column_to_all_sheets:102  | ✅ 🏢 Baker and Davis: Live_Position column added successfully
+2025-08-26 17:56:51,399 | INFO     | verify_live_position_columns:123  | 🔍 Verifying Live_Position columns in 4 company sheets...
+2025-08-26 17:56:51,815 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from johnlee sheet
+2025-08-26 17:56:51,815 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.416 seconds
+2025-08-26 17:56:51,816 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.417 seconds
+2025-08-26 17:56:51,817 | INFO     | verify_live_position_columns:135  | ✅ 🏪 JohnLee: Live_Position column verified
+2025-08-26 17:56:52,219 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from yugrow sheet
+2025-08-26 17:56:52,221 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.402 seconds
+2025-08-26 17:56:52,222 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.403 seconds
+2025-08-26 17:56:52,223 | INFO     | verify_live_position_columns:135  | ✅ 💊 Yugrow Pharmacy: Live_Position column verified
+2025-08-26 17:56:52,673 | INFO     | get_company_records :177  | 📊 Retrieved 0 records from ambica sheet
+2025-08-26 17:56:52,675 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.450 seconds
+2025-08-26 17:56:52,676 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.451 seconds
+2025-08-26 17:56:52,677 | WARNING  | verify_live_position_columns:137  | ❌ 🏥 Ambica Pharma: Live_Position column missing
+2025-08-26 17:56:53,103 | INFO     | get_company_records :177  | 📊 Retrieved 10 records from baker sheet
+2025-08-26 17:56:53,103 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.425 seconds
+2025-08-26 17:56:53,103 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.425 seconds
+2025-08-26 17:56:53,103 | INFO     | verify_live_position_columns:135  | ✅ 🏢 Baker and Davis: Live_Position column verified
+2025-08-26 17:56:53,549 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from johnlee sheet
+2025-08-26 17:56:53,554 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.435 seconds
+2025-08-26 17:56:53,554 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.436 seconds
+2025-08-26 17:56:54,008 | INFO     | get_company_records :177  | 📊 Retrieved 8 records from yugrow sheet
+2025-08-26 17:56:54,009 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.449 seconds
+2025-08-26 17:56:54,010 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.451 seconds
+2025-08-26 17:56:54,454 | INFO     | get_company_records :177  | 📊 Retrieved 0 records from ambica sheet
+2025-08-26 17:56:54,455 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.442 seconds
+2025-08-26 17:56:54,456 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.443 seconds
+2025-08-26 17:56:54,883 | INFO     | get_company_records :177  | 📊 Retrieved 10 records from baker sheet
+2025-08-26 17:56:54,884 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.425 seconds
+2025-08-26 17:56:54,884 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.425 seconds

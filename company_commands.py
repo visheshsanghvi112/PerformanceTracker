@@ -13,6 +13,85 @@ from logger import logger
 from typing import Dict, List
 
 # ═══════════════════════════════════════════════════════════════
+# 🛡️ SAFE FORMATTING FUNCTIONS
+# ═══════════════════════════════════════════════════════════════
+
+def safe_format_revenue(revenue_value) -> str:
+    """
+    🛡️ Safely format revenue value as currency string.
+    Handles various data types and formats gracefully.
+    
+    Args:
+        revenue_value: Revenue value (int, float, str, or None)
+        
+    Returns:
+        str: Formatted currency string
+    """
+    try:
+        if revenue_value is None:
+            return "₹0"
+        
+        if isinstance(revenue_value, (int, float)):
+            return f"₹{revenue_value:,.2f}"
+        elif isinstance(revenue_value, str):
+            # Try to convert string to number
+            clean_value = str(revenue_value).replace('₹', '').replace(',', '').strip()
+            if clean_value and clean_value.lower() not in ['nan', 'none', '']:
+                numeric_value = float(clean_value)
+                return f"₹{numeric_value:,.2f}"
+            else:
+                return "₹0"
+        else:
+            # Fallback for unknown types
+            return f"₹{revenue_value}"
+    except (ValueError, TypeError) as e:
+        logger.warning(f"⚠️ Could not format revenue '{revenue_value}': {e}")
+        return f"₹{revenue_value}"
+
+def escape_markdown_safely(text) -> str:
+    """
+    🛡️ Safely escape markdown characters in text.
+    
+    Args:
+        text: Text to escape (any type)
+        
+    Returns:
+        str: Safely escaped text
+    """
+    if text is None:
+        return "N/A"
+    
+    text_str = str(text)
+    # Escape markdown special characters
+    escaped = text_str.replace("_", "\\_").replace("*", "\\*").replace("`", "\\`")
+    escaped = escaped.replace("[", "\\[").replace("]", "\\]").replace("(", "\\(").replace(")", "\\)")
+    return escaped
+
+def safe_format_number(value, default=0) -> int:
+    """
+    🛡️ Safely convert value to integer.
+    
+    Args:
+        value: Value to convert
+        default: Default value if conversion fails
+        
+    Returns:
+        int: Converted integer value
+    """
+    try:
+        if value is None:
+            return default
+        if isinstance(value, (int, float)):
+            return int(value)
+        if isinstance(value, str):
+            clean_value = str(value).strip()
+            if clean_value and clean_value.lower() not in ['nan', 'none', '']:
+                return int(float(clean_value))
+        return default
+    except (ValueError, TypeError):
+        return default
+
+# ═══════════════════════════════════════════════════════════════
 # 🏢 COMPANY SELECTION COMMANDS
 # ═══════════════════════════════════════════════════════════════
 
@@ -112,21 +191,27 @@ async def handle_company_callback(update: Update, context: ContextTypes.DEFAULT_
     try:
         if data.startswith("register_company_"):
             company_key = data.replace("register_company_", "")
-            success = company_manager.register_user(user.id, user.full_name or user.first_name, company_key)
+            
+            # Use improved assignment method
+            success = company_manager.assign_user_to_company(user.id, company_key)
             
             if success:
                 company_info = company_manager.get_company_info(company_key)
                 await query.edit_message_text(
                     f"✅ **Successfully registered!**\n\n"
-                    f"🏢 **Company:** {company_info['display_name']}\n"
-                    f"👤 **User:** {user.full_name or user.first_name}\n\n"
+                    f"🏢 **Company:** {escape_markdown_safely(company_info['display_name'])}\n"
+                    f"👤 **User:** {escape_markdown_safely(user.full_name or user.first_name)}\n\n"
                     f"🚀 **You can now use all bot features!**\n"
                     f"💡 Use `/start` to begin or `/company` to switch companies later.",
                     parse_mode='Markdown'
                 )
                 logger.info(f"✅ User {user.id} registered with company {company_key}")
             else:
-                await query.edit_message_text("❌ Registration failed. Please try again.")
+                await query.edit_message_text(
+                    "❌ **Registration failed**\n\n"
+                    "Please try again or contact support if the problem persists.\n\n"
+                    "💡 Use `/company` to try again."
+                )
                 logger.error(f"❌ Registration failed for user {user.id}")
         
         elif data.startswith("switch_company_"):
@@ -137,14 +222,21 @@ async def handle_company_callback(update: Update, context: ContextTypes.DEFAULT_
                 company_info = company_manager.get_company_info(company_key)
                 await query.edit_message_text(
                     f"🔄 **Company switched successfully!**\n\n"
-                    f"🏢 **New Company:** {company_info['display_name']}\n"
-                    f"📊 **All analytics and data will now show {company_info['name']} information.**\n\n"
+                    f"🏢 **New Company:** {escape_markdown_safely(company_info['display_name'])}\n"
+                    f"📊 **All analytics and data will now show {escape_markdown_safely(company_info['name'])} information.**\n\n"
                     f"💡 Try `/dashboard` to see your new company dashboard!",
                     parse_mode='Markdown'
                 )
                 logger.info(f"🔄 User {user.id} switched to company {company_key}")
             else:
-                await query.edit_message_text("❌ Company switch failed. Please try again.")
+                await query.edit_message_text(
+                    "❌ **Company switch failed**\n\n"
+                    "This could be due to:\n"
+                    "• Invalid company selection\n"
+                    "• Access permissions\n"
+                    "• Temporary system issue\n\n"
+                    "💡 Try `/company` again or contact support."
+                )
                 logger.error(f"❌ Company switch failed for user {user.id}")
         
         elif data.startswith("company_info_"):
@@ -153,13 +245,13 @@ async def handle_company_callback(update: Update, context: ContextTypes.DEFAULT_
             stats = multi_sheet_manager.get_company_stats(company_key)
             
             info_text = (
-                f"📊 **{company_info['display_name']} Information**\n\n"
+                f"📊 **{escape_markdown_safely(company_info['display_name'])} Information**\n\n"
                 f"📈 **Statistics:**\n"
-                f"• Records: {stats.get('total_records', 0)}\n"
-                f"• Users: {stats.get('total_users', 0)}\n"
-                f"• Revenue: ₹{stats.get('total_revenue', 0):,.2f}\n"
-                f"• Period: {stats.get('date_range', 'No data')}\n\n"
-                f"🔧 **Sheet:** {company_info.get('sheet_name', 'N/A')}"
+                f"• Records: {safe_format_number(stats.get('total_records', 0))}\n"
+                f"• Users: {safe_format_number(stats.get('total_users', 0))}\n"
+                f"• Revenue: {safe_format_revenue(stats.get('total_revenue', 0))}\n"
+                f"• Period: {escape_markdown_safely(stats.get('date_range', 'No data'))}\n\n"
+                f"🔧 **Sheet:** {escape_markdown_safely(company_info.get('sheet_name', 'N/A'))}"
             )
             
             await query.edit_message_text(info_text, parse_mode='Markdown')
@@ -271,11 +363,11 @@ async def admin_stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE
             company_revenue = stats.get('total_revenue', 0)
             
             text += (
-                f"🏢 **{company_info['display_name']}**\n"
-                f"📊 Records: {company_records}\n"
-                f"👥 Users: {company_users}\n"
-                f"💰 Revenue: ₹{company_revenue:,.2f}\n"
-                f"📅 Range: {stats.get('date_range', 'No data')}\n\n"
+                f"🏢 **{escape_markdown_safely(company_info['display_name'])}**\n"
+                f"📊 Records: {safe_format_number(company_records)}\n"
+                f"👥 Users: {safe_format_number(company_users)}\n"
+                f"💰 Revenue: {safe_format_revenue(company_revenue)}\n"
+                f"📅 Range: {escape_markdown_safely(stats.get('date_range', 'No data'))}\n\n"
             )
             
             total_records += company_records
@@ -284,9 +376,9 @@ async def admin_stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE
     
     text += (
         f"📈 **TOTALS ACROSS ALL COMPANIES:**\n"
-        f"📊 Total Records: {total_records}\n"
-        f"👥 Total Users: {len(company_manager.user_mappings)}\n"
-        f"💰 Total Revenue: ₹{total_revenue:,.2f}"
+        f"📊 Total Records: {safe_format_number(total_records)}\n"
+        f"👥 Total Users: {safe_format_number(len(company_manager.user_mappings))}\n"
+        f"💰 Total Revenue: {safe_format_revenue(total_revenue)}"
     )
     
     await update.message.reply_text(text, parse_mode='Markdown')

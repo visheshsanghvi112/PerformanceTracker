@@ -18,6 +18,9 @@ class ErrorType(Enum):
     NETWORK_ERROR = "network"
     PERMISSION_ERROR = "permission"
     RATE_LIMIT_ERROR = "rate_limit"
+    LOCATION_ERROR = "location"
+    GEOCODING_ERROR = "geocoding"
+    GPS_ERROR = "gps"
     UNKNOWN_ERROR = "unknown"
 
 
@@ -56,6 +59,21 @@ class ErrorHandler:
             'message': 'You\'re sending messages too quickly.',
             'action': 'Please wait a moment before trying again'
         },
+        ErrorType.LOCATION_ERROR: {
+            'title': '📍 Location Service Issue',
+            'message': 'Unable to process your location data.',
+            'action': 'Try sharing your location again or check your GPS settings'
+        },
+        ErrorType.GEOCODING_ERROR: {
+            'title': '🌍 Address Resolution Failed',
+            'message': 'Unable to convert your coordinates to an address.',
+            'action': 'Your location will be saved with coordinates only'
+        },
+        ErrorType.GPS_ERROR: {
+            'title': '🛰️ GPS Signal Issue',
+            'message': 'Your GPS coordinates appear to be invalid or inaccurate.',
+            'action': 'Please ensure GPS is enabled and try sharing location again'
+        },
         ErrorType.UNKNOWN_ERROR: {
             'title': '⚠️ Unexpected Error',
             'message': 'Something unexpected happened.',
@@ -81,6 +99,12 @@ class ErrorHandler:
             return ErrorType.PERMISSION_ERROR
         elif 'rate limit' in error_message or 'too many' in error_message:
             return ErrorType.RATE_LIMIT_ERROR
+        elif 'location' in error_message or 'coordinates' in error_message:
+            return ErrorType.LOCATION_ERROR
+        elif 'geocoding' in error_message or 'address' in error_message or 'nominatim' in error_message:
+            return ErrorType.GEOCODING_ERROR
+        elif 'gps' in error_message or 'latitude' in error_message or 'longitude' in error_message:
+            return ErrorType.GPS_ERROR
         else:
             return ErrorType.UNKNOWN_ERROR
     
@@ -246,4 +270,186 @@ async def handle_api_error(error: Exception, update: Update) -> None:
 
 async def handle_database_error(error: Exception, update: Update, entry_data: Optional[Dict[str, Any]] = None) -> None:
     """Quick database error handling"""
-    await ErrorHandler.handle_database_error(error, update, entry_data)
+    await ErrorHandler.handle_database_error(error, update, entry_data)  
+  @classmethod
+    async def handle_location_error(cls, error: Exception, update: Update, 
+                                  error_context: Optional[str] = None) -> None:
+        """Handle location-related errors with specific guidance"""
+        error_message = "📍 **Location Service Issue**\n\n"
+        
+        if error_context:
+            error_message += f"Context: {error_context}\n\n"
+        
+        error_message += f"Issue: {str(error)}\n\n"
+        error_message += "💡 **Troubleshooting Steps:**\n"
+        error_message += "• Ensure GPS is enabled on your device\n"
+        error_message += "• Check that Telegram has location permissions\n"
+        error_message += "• Try moving to an area with better GPS signal\n"
+        error_message += "• Wait a moment and try sharing location again\n\n"
+        error_message += "🔄 **Alternative:** You can continue without GPS - just enter location manually in your sales entries."
+        
+        try:
+            await update.message.reply_text(error_message, parse_mode='Markdown')
+        except Exception:
+            await update.message.reply_text(error_message.replace('*', ''))
+    
+    @classmethod
+    async def handle_geocoding_error(cls, error: Exception, update: Update,
+                                   coordinates: Optional[tuple] = None) -> None:
+        """Handle geocoding service errors with fallback options"""
+        error_message = "🌍 **Address Resolution Issue**\n\n"
+        error_message += "Unable to convert your GPS coordinates to a readable address.\n\n"
+        
+        if coordinates:
+            lat, lon = coordinates
+            error_message += f"📍 **Your Coordinates:** {lat:.6f}, {lon:.6f}\n\n"
+        
+        error_message += "💡 **What this means:**\n"
+        error_message += "• Your location is still saved with GPS coordinates\n"
+        error_message += "• Sales entries will include coordinate data\n"
+        error_message += "• Analytics will work with coordinate-based insights\n\n"
+        error_message += "🔧 **Possible causes:**\n"
+        error_message += "• Geocoding service temporarily unavailable\n"
+        error_message += "• Location is in a remote area\n"
+        error_message += "• Network connectivity issues\n\n"
+        error_message += "✅ **Your location data is still valuable for analytics!**"
+        
+        try:
+            await update.message.reply_text(error_message, parse_mode='Markdown')
+        except Exception:
+            await update.message.reply_text(error_message.replace('*', ''))
+    
+    @classmethod
+    async def handle_gps_accuracy_warning(cls, update: Update, accuracy: float,
+                                        threshold: float = 100) -> None:
+        """Handle GPS accuracy warnings"""
+        warning_message = "⚠️ **GPS Accuracy Warning**\n\n"
+        warning_message += f"Your GPS accuracy is {accuracy:.0f} meters.\n"
+        warning_message += f"For best results, we recommend accuracy under {threshold} meters.\n\n"
+        warning_message += "💡 **To improve accuracy:**\n"
+        warning_message += "• Move to an open area away from buildings\n"
+        warning_message += "• Ensure GPS is enabled in device settings\n"
+        warning_message += "• Wait for GPS to get a better signal\n"
+        warning_message += "• Try sharing location again in a few moments\n\n"
+        warning_message += "🤔 **Continue anyway?**\n"
+        warning_message += "Your location will still be saved, but may be less precise for analytics."
+        
+        try:
+            await update.message.reply_text(warning_message, parse_mode='Markdown')
+        except Exception:
+            await update.message.reply_text(warning_message.replace('*', ''))
+    
+    @classmethod
+    async def handle_location_permission_denied(cls, update: Update) -> None:
+        """Handle location permission denied scenarios"""
+        error_message = "🔒 **Location Permission Required**\n\n"
+        error_message += "It looks like location sharing was denied or cancelled.\n\n"
+        error_message += "📍 **To enable location features:**\n\n"
+        error_message += "**On Android:**\n"
+        error_message += "1. Open Telegram settings\n"
+        error_message += "2. Go to Privacy and Security\n"
+        error_message += "3. Enable Location permissions\n"
+        error_message += "4. Try `/location` command again\n\n"
+        error_message += "**On iOS:**\n"
+        error_message += "1. Go to iPhone Settings\n"
+        error_message += "2. Find Telegram in app list\n"
+        error_message += "3. Enable Location permissions\n"
+        error_message += "4. Try `/location` command again\n\n"
+        error_message += "💡 **Benefits of location sharing:**\n"
+        error_message += "• Automatic location tagging in sales entries\n"
+        error_message += "• Territory performance analytics\n"
+        error_message += "• Route optimization insights\n"
+        error_message += "• Geographic sales distribution analysis\n\n"
+        error_message += "🔄 **Ready to try again?** Use `/location` when you're ready!"
+        
+        try:
+            await update.message.reply_text(error_message, parse_mode='Markdown')
+        except Exception:
+            await update.message.reply_text(error_message.replace('*', ''))
+    
+    @classmethod
+    async def handle_location_service_unavailable(cls, update: Update) -> None:
+        """Handle location service unavailable scenarios"""
+        error_message = "🛠️ **Location Service Temporarily Unavailable**\n\n"
+        error_message += "Our location processing service is currently experiencing issues.\n\n"
+        error_message += "💡 **What you can do:**\n"
+        error_message += "• Continue with manual location entry in sales\n"
+        error_message += "• Try location sharing again in a few minutes\n"
+        error_message += "• Your sales entries will still be saved normally\n\n"
+        error_message += "🔄 **Service Status:**\n"
+        error_message += "• GPS coordinate processing: ⚠️ Limited\n"
+        error_message += "• Address resolution: ⚠️ Limited\n"
+        error_message += "• Sales entry logging: ✅ Working\n"
+        error_message += "• Analytics: ✅ Working\n\n"
+        error_message += "📧 **We're working to restore full service quickly!**"
+        
+        try:
+            await update.message.reply_text(error_message, parse_mode='Markdown')
+        except Exception:
+            await update.message.reply_text(error_message.replace('*', ''))
+    
+    @classmethod
+    def log_location_event(cls, event_type: str, user_id: int, details: Dict[str, Any]) -> None:
+        """Log location-related events for monitoring and debugging"""
+        log_entry = {
+            'event_type': event_type,
+            'user_id': user_id,
+            'timestamp': logger.handlers[0].formatter.formatTime(logger.makeRecord(
+                'location', 20, '', 0, '', (), None
+            )),
+            'details': details
+        }
+        
+        if event_type == 'location_shared':
+            logger.info(f"📍 Location shared by user {user_id}: {details}")
+        elif event_type == 'location_error':
+            logger.error(f"📍 Location error for user {user_id}: {details}")
+        elif event_type == 'geocoding_failed':
+            logger.warning(f"🌍 Geocoding failed for user {user_id}: {details}")
+        elif event_type == 'gps_accuracy_warning':
+            logger.warning(f"⚠️ GPS accuracy warning for user {user_id}: {details}")
+        else:
+            logger.info(f"📍 Location event '{event_type}' for user {user_id}: {details}")
+
+
+# Convenience functions for common error scenarios
+async def handle_error(error: Exception, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Main error handler - delegates to ErrorHandler class"""
+    await ErrorHandler.handle_error(error, update, context)
+
+async def handle_validation_error(error: Exception, update: Update, field_name: str = None) -> None:
+    """Handle validation errors"""
+    await ErrorHandler.handle_validation_error(error, update, field_name)
+
+async def handle_api_error(error: Exception, update: Update) -> None:
+    """Handle API errors"""
+    await ErrorHandler.handle_api_error(error, update)
+
+async def handle_database_error(error: Exception, update: Update, data: Dict[str, Any] = None) -> None:
+    """Handle database errors"""
+    await ErrorHandler.handle_database_error(error, update, data)
+
+# New location-specific error handlers
+async def handle_location_error(error: Exception, update: Update, context: str = None) -> None:
+    """Handle location-related errors"""
+    await ErrorHandler.handle_location_error(error, update, context)
+
+async def handle_geocoding_error(error: Exception, update: Update, coordinates: tuple = None) -> None:
+    """Handle geocoding service errors"""
+    await ErrorHandler.handle_geocoding_error(error, update, coordinates)
+
+async def handle_gps_accuracy_warning(update: Update, accuracy: float, threshold: float = 100) -> None:
+    """Handle GPS accuracy warnings"""
+    await ErrorHandler.handle_gps_accuracy_warning(update, accuracy, threshold)
+
+async def handle_location_permission_denied(update: Update) -> None:
+    """Handle location permission denied"""
+    await ErrorHandler.handle_location_permission_denied(update)
+
+async def handle_location_service_unavailable(update: Update) -> None:
+    """Handle location service unavailable"""
+    await ErrorHandler.handle_location_service_unavailable(update)
+
+def log_location_event(event_type: str, user_id: int, details: Dict[str, Any]) -> None:
+    """Log location events"""
+    ErrorHandler.log_location_event(event_type, user_id, details)
