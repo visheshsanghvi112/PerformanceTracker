@@ -6,6 +6,7 @@ from config import ADMIN_IDS
 from telegram import Update
 from telegram.ext import ContextTypes
 from gemini_parser import extract_with_gemini
+from ai_response_engine import ai_response_engine
 from input_processor import input_processor, validate_entry, ValidationError
 from error_handler import handle_error, handle_validation_error, handle_api_error, handle_database_error
 from decorators import rate_limit, handle_errors, measure_time
@@ -287,23 +288,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(response, parse_mode='Markdown')
                 return
 
-        # 3.5. Enhance entry data with GPS location if available
+        # 3.5. Keep original location from AI parsing (business location)
+        # Do NOT modify the location field with GPS data
         current_company = company_manager.get_user_company(user.id)
         gps_location_str = location_handler.get_location_for_entry(str(user.id), current_company)
         
+        # GPS location will be used only for live position, not for business location
         if gps_location_str:
-            # Enhance the location field with GPS data
-            original_location = entry_data.get('location', '')
-            if original_location and original_location.strip():
-                # Combine original location with GPS location
-                entry_data['location'] = f"{original_location} (GPS: {gps_location_str})"
-            else:
-                # Use GPS location as the location
-                entry_data['location'] = gps_location_str
-            
-            logger.info(f"📍 Enhanced entry with GPS location for user {user.id}: {gps_location_str}")
+            logger.info(f"📍 GPS location available for user {user.id}: {gps_location_str}")
         
-        # 3.6. Add live position data if available (SEPARATE from GPS location)
+        # 3.6. Add live position data if available (SEPARATE from business location)
         from live_position_handler import live_position_handler
         live_position_str = live_position_handler.get_live_position_for_entry(str(user.id), current_company)
         
@@ -392,9 +386,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"🆔 Entry ID: {entry_id}"
         )
         
-        # Add GPS enhancement note if location was enhanced
+        # Add GPS enhancement note only if GPS data was available (but not mixed with business location)
         if gps_location_str:
-            confirmation_message += f"\n\n📍 **GPS Enhanced:** Entry includes your current location for better tracking"
+            confirmation_message += f"\n\n📍 **GPS Enhanced:** Your current location tracked separately for analysis"
         
         # Add live position note if live position was included
         if live_position_str:

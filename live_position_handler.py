@@ -12,7 +12,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardR
 from telegram.ext import ContextTypes
 
 from live_position_storage import live_position_storage
-from geocoding import geocode_service
+from geocoding import geocoding_service
 from company_manager import company_manager
 from logger import logger
 from error_handler import (
@@ -206,7 +206,7 @@ class LivePositionHandler:
             
             # Get position information with error handling
             try:
-                position_info = geocode_service.get_location_info(
+                position_info = geocoding_service.get_location_info(
                     location.latitude, 
                     location.longitude
                 )

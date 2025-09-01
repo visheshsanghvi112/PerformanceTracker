@@ -12,7 +12,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from logger import logger
-from gemini_parser import extract_with_gemini
+from gemini_parser import extract_with_gemini, extract_with_gemini_parallel, get_api_status
 from input_processor import input_processor, validate_entry, ValidationError
 from multi_company_sheets import multi_sheet_manager
 from company_manager import company_manager
@@ -28,7 +28,7 @@ class BatchHandler:
     
     async def process_batch_entries(self, update: Update, context: ContextTypes.DEFAULT_TYPE, 
                                   entries_text: str, user_type: str) -> Dict[str, Any]:
-        """Process multiple entries from a single message"""
+        """Process multiple entries from a single message with parallel AI processing"""
         try:
             user = update.effective_user
             logger.info(f"📦 Processing batch entries for user {user.id}")
@@ -44,7 +44,120 @@ class BatchHandler:
                     'failed': len(raw_entries)
                 }
             
-            # Process each entry
+            # Check API status for parallel processing
+            api_status = get_api_status()
+            use_parallel = api_status['parallel_capable'] and len(raw_entries) > 1
+            
+            if use_parallel:
+                logger.info(f"🚀 Using parallel processing with {api_status['total_keys']} API keys")
+                return await self._process_entries_parallel(raw_entries, user_type, user)
+            else:
+                logger.info(f"⚡ Using sequential processing with {api_status['total_keys']} API key(s)")
+                return await self._process_entries_sequential(raw_entries, user_type, user)
+                
+        except Exception as e:
+            logger.error(f"📦 Batch processing error: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'processed': 0,
+                'failed': 0
+            }
+    
+    async def _process_entries_parallel(self, raw_entries: List[str], user_type: str, user) -> Dict[str, Any]:
+        """Process entries in parallel using multiple API keys"""
+        try:
+            # Pre-validate all entries
+            valid_entries = []
+            failed_entries = []
+            
+            for i, entry_text in enumerate(raw_entries):
+                process_result = input_processor.process_input(entry_text.strip())
+                if process_result['is_valid']:
+                    valid_entries.append((i + 1, entry_text.strip()))
+                else:
+                    failed_entries.append({
+                        'text': entry_text,
+                        'error': process_result['reason'],
+                        'index': i + 1
+                    })
+            
+            if not valid_entries:
+                return {
+                    'success': False,
+                    'error': 'No valid entries found',
+                    'processed': 0,
+                    'failed': len(failed_entries)
+                }
+            
+            # Extract text for parallel AI processing
+            valid_texts = [entry[1] for entry in valid_entries]
+            
+            # 🚀 PARALLEL AI PROCESSING - This is where multiple API keys shine!
+            logger.info(f"🚀 Starting parallel AI processing of {len(valid_texts)} entries")
+            start_time = datetime.datetime.now()
+            
+            parsed_results = await extract_with_gemini_parallel(valid_texts)
+            
+            end_time = datetime.datetime.now()
+            processing_time = (end_time - start_time).total_seconds()
+            logger.info(f"⚡ Parallel AI processing completed in {processing_time:.2f} seconds")
+            
+            # Process parsed results
+            processed_entries = []
+            for i, parsed_data in enumerate(parsed_results):
+                original_index, original_text = valid_entries[i]
+                
+                if not parsed_data or not self._is_valid_entry(parsed_data):
+                    failed_entries.append({
+                        'text': original_text,
+                        'error': 'parsing_failed',
+                        'index': original_index
+                    })
+                    continue
+                
+                try:
+                    # Create entry data
+                    entry_data = {
+                        'client': parsed_data.get('client'),
+                        'location': parsed_data.get('location'),
+                        'orders': parsed_data.get('orders'),
+                        'amount': parsed_data.get('amount'),
+                        'remarks': parsed_data.get('remarks') or original_text,
+                        'type': user_type,
+                        'date': datetime.datetime.now()
+                    }
+                    
+                    validated_data, warnings = validate_entry(entry_data)
+                    processed_entries.append({
+                        'data': validated_data,
+                        'warnings': warnings,
+                        'original_text': original_text,
+                        'index': original_index
+                    })
+                    
+                except Exception as e:
+                    logger.error(f"📦 Error validating entry {original_index}: {e}")
+                    failed_entries.append({
+                        'text': original_text,
+                        'error': str(e),
+                        'index': original_index
+                    })
+            
+            return await self._store_processed_entries(processed_entries, failed_entries, user, processing_time)
+            
+        except Exception as e:
+            logger.error(f"📦 Parallel processing error: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'processed': 0,
+                'failed': len(raw_entries)
+            }
+    
+    async def _process_entries_sequential(self, raw_entries: List[str], user_type: str, user) -> Dict[str, Any]:
+        """Process entries sequentially (fallback method)"""
+        try:
             processed_entries = []
             failed_entries = []
             
@@ -106,23 +219,48 @@ class BatchHandler:
                     processed_entries, user, user_type
                 )
             
-            return {
-                'success': len(saved_entries) > 0,
-                'processed': len(saved_entries),
-                'failed': len(failed_entries),
-                'total': len(raw_entries),
-                'saved_entries': saved_entries,
-                'failed_entries': failed_entries,
-                'warnings': self._collect_warnings(processed_entries)
-            }
+            return await self._store_processed_entries(processed_entries, failed_entries, user, 0.0)
             
         except Exception as e:
-            logger.error(f"📦 Batch processing error: {e}")
+            logger.error(f"📦 Sequential processing error: {e}")
             return {
                 'success': False,
                 'error': str(e),
                 'processed': 0,
-                'failed': 0
+                'failed': len(raw_entries)
+            }
+    
+    async def _store_processed_entries(self, processed_entries: List[Dict[str, Any]], 
+                                     failed_entries: List[Dict[str, Any]], 
+                                     user: Any, processing_time: float) -> Dict[str, Any]:
+        """Store successfully processed entries and return results"""
+        try:
+            # Save successful entries to database
+            saved_entries = []
+            if processed_entries:
+                saved_entries = await self._save_batch_entries(
+                    processed_entries, user, "sale"  # Default to sale type
+                )
+            
+            return {
+                'success': len(saved_entries) > 0,
+                'processed': len(saved_entries),
+                'failed': len(failed_entries),
+                'total': len(processed_entries) + len(failed_entries),
+                'saved_entries': saved_entries,
+                'failed_entries': failed_entries,
+                'warnings': self._collect_warnings(processed_entries),
+                'processing_time_seconds': processing_time,
+                'used_parallel_processing': processing_time > 0
+            }
+            
+        except Exception as e:
+            logger.error(f"📦 Error storing processed entries: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'processed': 0,
+                'failed': len(failed_entries)
             }
     
     def _split_entries(self, text: str) -> List[str]:
@@ -295,11 +433,13 @@ class BatchHandler:
     
     def detect_batch_input(self, text: str) -> bool:
         """Detect if input contains multiple entries"""
+        text_lower = text.lower()  # Make case-insensitive
+        
         # Check for multiple entry indicators
         indicators = [
             text.count('\n\n') >= 1,  # Double line breaks
-            text.count('Client:') > 1,  # Multiple client fields
-            text.count('sold') + text.count('bought') > 1,  # Multiple transactions
+            text_lower.count('client:') > 1,  # Multiple client fields
+            text_lower.count('sold') + text_lower.count('bought') + text_lower.count('purchase') > 1,  # Multiple transactions
             len(text.split('\n')) > 6,  # Many lines
             any(sep in text for sep in ['---', '***', '===']),  # Explicit separators
         ]

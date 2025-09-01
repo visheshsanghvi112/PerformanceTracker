@@ -5,6 +5,8 @@ python-dotenv>=1.0.0
 # Data processing and validation
 pandas>=2.0.0
 datasets>=2.0.0
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
 
 # Google Sheets integration
 gspread>=5.0.0

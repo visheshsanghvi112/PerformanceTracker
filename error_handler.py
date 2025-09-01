@@ -271,27 +271,28 @@ async def handle_api_error(error: Exception, update: Update) -> None:
 async def handle_database_error(error: Exception, update: Update, entry_data: Optional[Dict[str, Any]] = None) -> None:
     """Quick database error handling"""
     await ErrorHandler.handle_database_error(error, update, entry_data)  
-  @classmethod
-    async def handle_location_error(cls, error: Exception, update: Update, 
-                                  error_context: Optional[str] = None) -> None:
-        """Handle location-related errors with specific guidance"""
-        error_message = "📍 **Location Service Issue**\n\n"
-        
-        if error_context:
-            error_message += f"Context: {error_context}\n\n"
-        
-        error_message += f"Issue: {str(error)}\n\n"
-        error_message += "💡 **Troubleshooting Steps:**\n"
-        error_message += "• Ensure GPS is enabled on your device\n"
-        error_message += "• Check that Telegram has location permissions\n"
-        error_message += "• Try moving to an area with better GPS signal\n"
-        error_message += "• Wait a moment and try sharing location again\n\n"
-        error_message += "🔄 **Alternative:** You can continue without GPS - just enter location manually in your sales entries."
-        
-        try:
-            await update.message.reply_text(error_message, parse_mode='Markdown')
-        except Exception:
-            await update.message.reply_text(error_message.replace('*', ''))
+    
+@classmethod
+async def handle_location_error(cls, error: Exception, update: Update, 
+                                error_context: Optional[str] = None) -> None:
+    """Handle location-related errors with specific guidance"""
+    error_message = "📍 **Location Service Issue**\n\n"
+    
+    if error_context:
+        error_message += f"Context: {error_context}\n\n"
+
+    error_message += f"Issue: {str(error)}\n\n"
+    error_message += "💡 **Troubleshooting Steps:**\n"
+    error_message += "• Ensure GPS is enabled on your device\n"
+    error_message += "• Check that Telegram has location permissions\n"
+    error_message += "• Try moving to an area with better GPS signal\n"
+    error_message += "• Wait a moment and try sharing location again\n\n"
+    error_message += "🔄 **Alternative:** You can continue without GPS - just enter location manually in your sales entries."
+
+    try:
+        await update.message.reply_text(error_message, parse_mode='Markdown')
+    except Exception:
+        await update.message.reply_text(error_message.replace('*', ''))
     
     @classmethod
     async def handle_geocoding_error(cls, error: Exception, update: Update,

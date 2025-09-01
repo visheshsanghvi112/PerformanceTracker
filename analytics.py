@@ -21,6 +21,7 @@ from config import DATA_DIR
 from multi_company_sheets import multi_sheet_manager
 from company_manager import company_manager
 from logger import logger
+from smart_normalizer import smart_normalizer
 
 # Set professional styling
 plt.style.use('seaborn-v0_8')
@@ -88,33 +89,79 @@ class AdvancedAnalytics:
             return self._load_backup_data(user_id)
     
     def _clean_and_normalize_data(self, df: pd.DataFrame) -> pd.DataFrame:
-        """🧹 Clean and normalize data for analysis"""
+        """🧹 Clean and normalize data for analysis with smart normalization"""
         try:
+            logger.debug(f"🔍 Available columns: {list(df.columns)}")
+            
+            # 🧠 STEP 1: Apply smart normalization for client and location names
+            df_normalized = smart_normalizer.normalize_dataframe(df)
+            
             # Convert date strings to datetime
-            if 'date' in df.columns:
-                df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            if 'date' in df_normalized.columns:
+                df_normalized['date'] = pd.to_datetime(df_normalized['date'], errors='coerce')
             
-            # Convert numeric columns
-            for col in ['amount', 'orders']:
-                if col in df.columns:
-                    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+            # Convert numeric columns - check both original and capitalized versions
+            amount_cols = ['amount', 'Amount', 'revenue', 'Revenue']
+            orders_cols = ['orders', 'Orders', 'quantity', 'Quantity']
             
-            # Clean text columns
-            for col in ['client', 'location', 'type', 'remarks']:
-                if col in df.columns:
-                    df[col] = df[col].astype(str).str.strip()
+            for col in amount_cols:
+                if col in df_normalized.columns:
+                    df_normalized[col] = pd.to_numeric(df_normalized[col], errors='coerce').fillna(0)
+                    logger.debug(f"✅ Converted {col} to numeric")
+                    break  # Use first found column
+                    
+            for col in orders_cols:
+                if col in df_normalized.columns:
+                    df_normalized[col] = pd.to_numeric(df_normalized[col], errors='coerce').fillna(0)
+                    logger.debug(f"✅ Converted {col} to numeric")
+                    break  # Use first found column
             
-            # Add calculated columns
-            df['revenue_per_order'] = df['amount'] / df['orders'].replace(0, 1)
-            df['month'] = df['date'].dt.to_period('M') if 'date' in df.columns else None
-            df['weekday'] = df['date'].dt.day_name() if 'date' in df.columns else None
-            df['hour'] = df['date'].dt.hour if 'date' in df.columns else None
+            # Clean text columns - check both versions
+            text_columns = ['client', 'Client', 'location', 'Location', 'type', 'Type', 'remarks', 'Remarks']
+            for col in text_columns:
+                if col in df_normalized.columns:
+                    df_normalized[col] = df_normalized[col].astype(str).str.strip()
+                    logger.debug(f"✅ Cleaned {col} text column")
             
-            logger.debug(f"🧹 Data cleaned: {len(df)} records with {len(df.columns)} columns")
-            return df
+            # 🎯 STEP 2: Use normalized columns for analytics
+            # Replace original columns with normalized versions for consistency
+            if 'Client_Normalized' in df_normalized.columns:
+                df_normalized['Client'] = df_normalized['Client_Normalized']
+                logger.info("🧠 Using normalized client names for analytics")
+                
+            if 'Location_Normalized' in df_normalized.columns:
+                df_normalized['Location'] = df_normalized['Location_Normalized']
+                logger.info("🧠 Using normalized location names for analytics")
+            
+            # Add calculated columns only if base columns exist
+            amount_col = next((col for col in ['Amount', 'amount', 'revenue', 'Revenue'] if col in df_normalized.columns), None)
+            orders_col = next((col for col in ['Orders', 'orders', 'quantity', 'Quantity'] if col in df_normalized.columns), None)
+            
+            if amount_col and orders_col:
+                df_normalized['revenue_per_order'] = df_normalized[amount_col] / df_normalized[orders_col].replace(0, 1)
+            
+            # Add time-based columns if date exists
+            date_col = next((col for col in ['Date', 'date'] if col in df_normalized.columns), None)
+            if date_col:
+                df_normalized['date'] = pd.to_datetime(df_normalized[date_col], format='%d-%m-%Y', errors='coerce')
+                df_normalized['month'] = df_normalized['date'].dt.to_period('M')
+                df_normalized['weekday'] = df_normalized['date'].dt.day_name()
+                df_normalized['hour'] = df_normalized['date'].dt.hour
+            
+            # Log normalization summary
+            try:
+                from smart_normalizer import get_normalization_summary
+                summary = get_normalization_summary(df)
+                logger.info(f"🧠 Smart normalization completed:\n{summary}")
+            except:
+                pass
+            
+            logger.debug(f"🧹 Data cleaned: {len(df_normalized)} records with {len(df_normalized.columns)} columns")
+            return df_normalized
             
         except Exception as e:
             logger.error(f"❌ Data cleaning failed: {e}")
+            logger.debug(f"🔍 DataFrame info: {df.info() if not df.empty else 'Empty DataFrame'}")
             return df
     
     def _load_backup_data(self, user_id: int = None) -> pd.DataFrame:
@@ -152,23 +199,29 @@ class AdvancedAnalytics:
         logger.info(f"📊 Generating executive dashboard for user {user_id}...")
         
         # Core KPIs
-        total_revenue = df['amount'].sum()
-        total_orders = df['orders'].sum()
-        unique_clients = df['client'].nunique()
+        # Use flexible column names
+        client_col = 'Client' if 'Client' in df.columns else 'client'
+        location_col = 'Location' if 'Location' in df.columns else 'location'  
+        amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+        orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
+        
+        total_revenue = df[amount_col].sum()
+        total_orders = df[orders_col].sum()
+        unique_clients = df[client_col].nunique()
         avg_order_value = df['revenue_per_order'].mean()
         
         # Time-based analysis
         if 'date' in df.columns and not df['date'].isna().all():
             date_range = f"{df['date'].min().strftime('%Y-%m-%d')} to {df['date'].max().strftime('%Y-%m-%d')}"
-            daily_revenue = df.groupby(df['date'].dt.date)['amount'].sum()
+            daily_revenue = df.groupby(df['date'].dt.date)[amount_col].sum()
             growth_trend = self._calculate_growth_trend(daily_revenue)
         else:
             date_range = "Date information not available"
             growth_trend = 0
         
-        # Top performers
-        top_clients = df.groupby('client')['amount'].sum().nlargest(5).to_dict()
-        top_locations = df.groupby('location')['amount'].sum().nlargest(5).to_dict()
+        
+        top_clients = df.groupby(client_col)[amount_col].sum().nlargest(5).to_dict()
+        top_locations = df.groupby(location_col)[amount_col].sum().nlargest(5).to_dict()
         
         # Performance metrics
         client_retention = self._calculate_client_retention(df)
@@ -250,16 +303,29 @@ class AdvancedAnalytics:
         """📍 Extract GPS coordinates from location field"""
         try:
             df_copy = df.copy()
+            
+            # Use flexible column names for location
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            
+            # Check if location column exists
+            if location_col not in df_copy.columns:
+                logger.warning(f"⚠️ No '{location_col}' column found in data")
+                df_copy['has_gps'] = False
+                df_copy['gps_latitude'] = None
+                df_copy['gps_longitude'] = None
+                df_copy['base_location'] = 'Unknown'
+                return df_copy
+            
             df_copy['has_gps'] = False
             df_copy['gps_latitude'] = None
             df_copy['gps_longitude'] = None
-            df_copy['base_location'] = df_copy['location']
+            df_copy['base_location'] = df_copy[location_col]
             
             # Extract GPS coordinates from location field (format: "Location (GPS: lat, lon)")
             gps_pattern = r'GPS:\s*(-?\d+\.?\d*),\s*(-?\d+\.?\d*)'
             
             for idx, row in df_copy.iterrows():
-                location_str = str(row['location'])
+                location_str = str(row[location_col]) if row[location_col] is not None else ''
                 
                 # Check if location contains GPS data
                 if 'GPS:' in location_str:
@@ -279,26 +345,48 @@ class AdvancedAnalytics:
             
         except Exception as e:
             logger.error(f"❌ GPS data extraction failed: {e}")
+            logger.debug(f"🔍 Available columns: {list(df.columns) if not df.empty else 'Empty DataFrame'}")
             df['has_gps'] = False
-            df['base_location'] = df['location']
+            df['base_location'] = df.get(location_col, 'Unknown')
             return df
     
     def _analyze_territory_performance(self, df: pd.DataFrame) -> Dict[str, Any]:
         """🗺️ Analyze performance by territory/location"""
         try:
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            
+            # Check if orders column exists
+            orders_col = None
+            for col in ['Orders', 'orders', 'order_count', 'Order_Count']:
+                if col in df.columns:
+                    orders_col = col
+                    break
+            
             # Group by base location for territory analysis
-            territory_stats = df.groupby('base_location').agg({
-                'amount': ['sum', 'mean', 'count'],
-                'orders': 'sum',
-                'client': 'nunique'
-            }).round(2)
+            agg_dict = {
+                amount_col: ['sum', 'mean', 'count'],
+                client_col: 'nunique'
+            }
+            
+            # Only include orders if column exists
+            if orders_col:
+                agg_dict[orders_col] = 'sum'
+            
+            territory_stats = df.groupby('base_location').agg(agg_dict).round(2)
             
             # Flatten column names
-            territory_stats.columns = ['total_revenue', 'avg_revenue', 'visit_count', 'total_orders', 'unique_clients']
+            if orders_col:
+                territory_stats.columns = ['total_revenue', 'avg_revenue', 'visit_count', 'unique_clients', 'total_orders']
+                territory_stats['orders_per_visit'] = territory_stats['total_orders'] / territory_stats['visit_count']
+            else:
+                territory_stats.columns = ['total_revenue', 'avg_revenue', 'visit_count', 'unique_clients']
+                territory_stats['total_orders'] = territory_stats['visit_count']  # Use visit count as proxy
+                territory_stats['orders_per_visit'] = 1  # Default to 1 order per visit
             
             # Calculate efficiency metrics
             territory_stats['revenue_per_visit'] = territory_stats['total_revenue'] / territory_stats['visit_count']
-            territory_stats['orders_per_visit'] = territory_stats['total_orders'] / territory_stats['visit_count']
             territory_stats['client_density'] = territory_stats['unique_clients'] / territory_stats['visit_count']
             
             # Sort by total revenue
@@ -347,10 +435,14 @@ class AdvancedAnalytics:
             if df.empty:
                 return {"error": "No data for efficiency calculation"}
             
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
+            
             # Overall efficiency metrics
             total_locations = df['base_location'].nunique()
             total_visits = len(df)
-            total_revenue = df['amount'].sum()
+            total_revenue = df[amount_col].sum()
             
             # GPS-enhanced vs non-GPS entries
             gps_entries = df[df['has_gps'] == True]
@@ -358,14 +450,14 @@ class AdvancedAnalytics:
             
             gps_efficiency = {
                 "entries": len(gps_entries),
-                "avg_revenue": gps_entries['amount'].mean() if len(gps_entries) > 0 else 0,
-                "avg_orders": gps_entries['orders'].mean() if len(gps_entries) > 0 else 0
+                "avg_revenue": gps_entries[amount_col].mean() if len(gps_entries) > 0 else 0,
+                "avg_orders": gps_entries[orders_col].mean() if len(gps_entries) > 0 else 0
             }
             
             non_gps_efficiency = {
                 "entries": len(non_gps_entries),
-                "avg_revenue": non_gps_entries['amount'].mean() if len(non_gps_entries) > 0 else 0,
-                "avg_orders": non_gps_entries['orders'].mean() if len(non_gps_entries) > 0 else 0
+                "avg_revenue": non_gps_entries[amount_col].mean() if len(non_gps_entries) > 0 else 0,
+                "avg_orders": non_gps_entries[orders_col].mean() if len(non_gps_entries) > 0 else 0
             }
             
             # Location concentration analysis
@@ -537,11 +629,15 @@ class AdvancedAnalytics:
             if 'date' not in df.columns or df['date'].isna().all():
                 return {"error": "Date information not available for trend analysis"}
             
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
+            
             # Monthly location performance
             df['month'] = df['date'].dt.to_period('M')
             monthly_location_stats = df.groupby(['month', 'base_location']).agg({
-                'amount': 'sum',
-                'orders': 'sum'
+                amount_col: 'sum',
+                orders_col: 'sum'
             }).reset_index()
             
             # Find trending locations
@@ -551,7 +647,7 @@ class AdvancedAnalytics:
                 if len(location_data) >= 2:
                     # Calculate trend (simple linear regression slope)
                     x = range(len(location_data))
-                    y = location_data['amount'].values
+                    y = location_data[amount_col].values
                     if len(x) > 1:
                         slope = np.polyfit(x, y, 1)[0]
                         location_trends[location] = slope
@@ -616,33 +712,37 @@ class AdvancedAnalytics:
         return insights
     
     def generate_advanced_charts(self, user_id: int, chart_type: str = "all") -> List[str]:
-        """📊 Generate professional analytical charts for specific user"""
+        """📊 Generate 3 professional analytical charts for specific user"""
         df = self.load_fresh_data(user_id)
         
         if df.empty:
             logger.warning(f"⚠️ No data available for charts for user {user_id}")
             return []
         
-        logger.info(f"📊 Generating {chart_type} charts for user {user_id}...")
+        logger.info(f"📊 Generating 3 professional charts for user {user_id}...")
         
         chart_files = []
         
+        # Generate exactly 3 charts that work properly
         if chart_type in ["all", "revenue"]:
-            chart_files.append(self._create_revenue_trend_chart(df))
+            revenue_chart = self._create_revenue_trend_chart(df)
+            if revenue_chart:
+                chart_files.append(revenue_chart)
         
         if chart_type in ["all", "client"]:
-            chart_files.append(self._create_client_performance_chart(df))
+            client_chart = self._create_client_performance_chart(df)
+            if client_chart:
+                chart_files.append(client_chart)
         
         if chart_type in ["all", "location"]:
-            chart_files.append(self._create_location_analysis_chart(df))
+            location_chart = self._create_location_analysis_chart(df)
+            if location_chart:
+                chart_files.append(location_chart)
         
-        if chart_type in ["all", "heatmap"]:
-            chart_files.append(self._create_performance_heatmap(df))
+        # Log successful chart generation
+        logger.info(f"✅ Successfully generated {len(chart_files)} charts")
         
-        if chart_type in ["all", "correlation"]:
-            chart_files.append(self._create_correlation_matrix(df))
-        
-        return [f for f in chart_files if f]  # Filter out None values
+        return chart_files
     
     # ═══════════════════════════════════════════════════════════════
     # 🧮 ADVANCED CALCULATION METHODS
@@ -671,8 +771,11 @@ class AdvancedAnalytics:
             return 0.0
         
         try:
+            # Use flexible column names
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            
             # Group by month and count unique clients
-            monthly_clients = df.groupby(df['date'].dt.to_period('M'))['client'].nunique()
+            monthly_clients = df.groupby(df['date'].dt.to_period('M'))[client_col].nunique()
             
             if len(monthly_clients) < 2:
                 return 100.0  # Single month = 100% retention
@@ -683,8 +786,8 @@ class AdvancedAnalytics:
                 current_month = monthly_clients.index[i]
                 previous_month = monthly_clients.index[i-1]
                 
-                current_clients = set(df[df['date'].dt.to_period('M') == current_month]['client'])
-                previous_clients = set(df[df['date'].dt.to_period('M') == previous_month]['client'])
+                current_clients = set(df[df['date'].dt.to_period('M') == current_month][client_col])
+                previous_clients = set(df[df['date'].dt.to_period('M') == previous_month][client_col])
                 
                 if previous_clients:
                     retained = len(current_clients & previous_clients)
@@ -700,12 +803,16 @@ class AdvancedAnalytics:
     def _calculate_location_efficiency(self, df: pd.DataFrame) -> float:
         """📍 Calculate location efficiency score"""
         try:
-            location_performance = df.groupby('location').agg({
-                'amount': 'sum',
-                'orders': 'sum'
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
+            
+            location_performance = df.groupby(location_col).agg({
+                amount_col: 'sum',
+                orders_col: 'sum'
             }).reset_index()
             
-            location_performance['efficiency'] = location_performance['amount'] / location_performance['orders'].replace(0, 1)
+            location_performance['efficiency'] = location_performance[amount_col] / location_performance[orders_col].replace(0, 1)
             
             # Score based on consistency (lower std dev = higher score)
             efficiency_std = location_performance['efficiency'].std()
@@ -726,7 +833,10 @@ class AdvancedAnalytics:
     def _calculate_revenue_concentration(self, df: pd.DataFrame) -> str:
         """💰 Calculate revenue concentration risk"""
         try:
-            client_revenue = df.groupby('client')['amount'].sum().sort_values(ascending=False)
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            
+            client_revenue = df.groupby(client_col)[amount_col].sum().sort_values(ascending=False)
             total_revenue = client_revenue.sum()
             
             if total_revenue == 0:
@@ -758,8 +868,11 @@ class AdvancedAnalytics:
             return {"error": "Insufficient data for forecasting"}
         
         try:
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            
             # Daily revenue trend
-            daily_revenue = df.groupby(df['date'].dt.date)['amount'].sum()
+            daily_revenue = df.groupby(df['date'].dt.date)[amount_col].sum()
             
             if len(daily_revenue) < 7:
                 return {"error": "Need at least 7 days of data"}
@@ -790,12 +903,18 @@ class AdvancedAnalytics:
             return {"error": "Date information required for churn analysis"}
         
         try:
+            # Use flexible column names
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            
+            if client_col not in df.columns:
+                return {"error": "Client information not available for churn analysis"}
+            
             current_date = df['date'].max()
             cutoff_date = current_date - timedelta(days=30)
             
             # Recent clients
-            recent_clients = set(df[df['date'] > cutoff_date]['client'])
-            all_clients = set(df['client'])
+            recent_clients = set(df[df['date'] > cutoff_date][client_col])
+            all_clients = set(df[client_col])
             
             inactive_clients = all_clients - recent_clients
             churn_rate = (len(inactive_clients) / len(all_clients) * 100) if all_clients else 0
@@ -825,12 +944,15 @@ class AdvancedAnalytics:
             return {"error": "Date information required for seasonal analysis"}
         
         try:
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            
             # Weekly patterns
-            weekday_performance = df.groupby('weekday')['amount'].agg(['sum', 'count']).round(2)
+            weekday_performance = df.groupby('weekday')[amount_col].agg(['sum', 'count']).round(2)
             
             # Monthly patterns (if data spans multiple months)
             if 'month' in df.columns:
-                monthly_performance = df.groupby('month')['amount'].sum()
+                monthly_performance = df.groupby('month')[amount_col].sum()
                 best_month = monthly_performance.idxmax() if not monthly_performance.empty else None
             else:
                 monthly_performance = pd.Series()
@@ -838,7 +960,7 @@ class AdvancedAnalytics:
             
             # Hour patterns (if available)
             if 'hour' in df.columns and not df['hour'].isna().all():
-                hourly_performance = df.groupby('hour')['amount'].sum()
+                hourly_performance = df.groupby('hour')[amount_col].sum()
                 peak_hour = hourly_performance.idxmax() if not hourly_performance.empty else None
             else:
                 peak_hour = None
@@ -860,9 +982,13 @@ class AdvancedAnalytics:
         
         try:
             # Low-performing locations with potential
-            location_stats = df.groupby('location').agg({
-                'amount': ['sum', 'count'],
-                'orders': 'sum'
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
+            
+            location_stats = df.groupby(location_col).agg({
+                amount_col: ['sum', 'count'],
+                orders_col: 'sum'
             }).round(2)
             
             if not location_stats.empty:
@@ -879,7 +1005,8 @@ class AdvancedAnalytics:
                     opportunities.append(f"🎯 Focus on {', '.join(underutilized.index[:3])} - high revenue potential")
             
             # Client expansion opportunities
-            client_stats = df.groupby('client')['amount'].agg(['sum', 'count'])
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            client_stats = df.groupby(client_col)[amount_col].agg(['sum', 'count'])
             if not client_stats.empty:
                 low_frequency_high_value = client_stats[
                     (client_stats['count'] < client_stats['count'].median()) & 
@@ -891,7 +1018,7 @@ class AdvancedAnalytics:
             
             # Time-based opportunities
             if 'weekday' in df.columns:
-                weekday_revenue = df.groupby('weekday')['amount'].sum()
+                weekday_revenue = df.groupby('weekday')[amount_col].sum()
                 if not weekday_revenue.empty:
                     weak_days = weekday_revenue.nsmallest(2).index.tolist()
                     opportunities.append(f"📅 Boost performance on {', '.join(weak_days)}")
@@ -910,8 +1037,11 @@ class AdvancedAnalytics:
         risks = []
         
         try:
-            # Revenue concentration risk
-            client_revenue = df.groupby('client')['amount'].sum().sort_values(ascending=False)
+            # Revenue concentration risk  
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            
+            client_revenue = df.groupby(client_col)[amount_col].sum().sort_values(ascending=False)
             if not client_revenue.empty:
                 top_client_share = (client_revenue.iloc[0] / client_revenue.sum() * 100)
                 if top_client_share > 50:
@@ -920,7 +1050,8 @@ class AdvancedAnalytics:
                     risks.append(f"⚠️ MEDIUM RISK: {top_client_share:.1f}% revenue from top client")
             
             # Location dependency risk
-            location_revenue = df.groupby('location')['amount'].sum().sort_values(ascending=False)
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            location_revenue = df.groupby(location_col)[amount_col].sum().sort_values(ascending=False)
             if not location_revenue.empty and len(location_revenue) > 1:
                 top_location_share = (location_revenue.iloc[0] / location_revenue.sum() * 100)
                 if top_location_share > 70:
@@ -928,8 +1059,8 @@ class AdvancedAnalytics:
             
             # Recent performance decline
             if 'date' in df.columns and len(df) > 10:
-                recent_revenue = df[df['date'] > (df['date'].max() - timedelta(days=7))]['amount'].sum()
-                older_revenue = df[df['date'] <= (df['date'].max() - timedelta(days=14))]['amount'].sum()
+                recent_revenue = df[df['date'] > (df['date'].max() - timedelta(days=7))][amount_col].sum()
+                older_revenue = df[df['date'] <= (df['date'].max() - timedelta(days=14))][amount_col].sum()
                 
                 if older_revenue > 0 and recent_revenue < (older_revenue * 0.7):
                     risks.append("📉 PERFORMANCE RISK: Revenue declined >30% recently")
@@ -953,10 +1084,14 @@ class AdvancedAnalytics:
             if 'date' not in df.columns:
                 return None
             
-            plt.figure(figsize=(12, 6))
-            daily_revenue = df.groupby(df['date'].dt.date)['amount'].sum()
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
             
-            plt.plot(daily_revenue.index, daily_revenue.values, marker='o', linewidth=2)
+            plt.figure(figsize=(12, 6))
+            daily_revenue = df.groupby(df['date'].dt.date)[amount_col].sum()
+            
+            plt.plot(daily_revenue.index, daily_revenue.values, 
+                    marker='o', linewidth=2, color='#1f77b4')
             plt.title('📈 Revenue Trend Analysis', fontsize=16, fontweight='bold')
             plt.xlabel('Date')
             plt.ylabel('Revenue (₹)')
@@ -967,7 +1102,8 @@ class AdvancedAnalytics:
             if len(daily_revenue) > 1:
                 z = np.polyfit(range(len(daily_revenue)), daily_revenue.values, 1)
                 p = np.poly1d(z)
-                plt.plot(daily_revenue.index, p(range(len(daily_revenue))), "--", alpha=0.7, color='red')
+                plt.plot(daily_revenue.index, p(range(len(daily_revenue))), 
+                        "--", alpha=0.7, color='red')
             
             plt.tight_layout()
             
@@ -985,31 +1121,52 @@ class AdvancedAnalytics:
     def _create_client_performance_chart(self, df: pd.DataFrame) -> Optional[str]:
         """👥 Create client performance chart"""
         try:
-            plt.figure(figsize=(12, 8))
+            # Use flexible column names
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
             
-            # Top 10 clients by revenue
-            client_revenue = df.groupby('client')['amount'].sum().nlargest(10)
+            # Filter out empty client names and get top 10
+            df_filtered = df[df[client_col].notna() & (df[client_col] != '')]
             
-            colors = plt.cm.Set3(np.linspace(0, 1, len(client_revenue)))
+            if df_filtered.empty:
+                logger.warning("⚠️ No valid client data for chart")
+                return None
+            
+            client_revenue = df_filtered.groupby(client_col)[amount_col].sum().nlargest(10)
+            
+            if len(client_revenue) == 0:
+                logger.warning("⚠️ No client revenue data for chart")
+                return None
+            
+            plt.figure(figsize=(14, 8))
+            
+            # Create colorful bars
+            colors = plt.cm.tab10(np.linspace(0, 1, len(client_revenue)))
             bars = plt.bar(range(len(client_revenue)), client_revenue.values, color=colors)
             
-            plt.title('👥 Top 10 Client Performance', fontsize=16, fontweight='bold')
-            plt.xlabel('Clients')
-            plt.ylabel('Revenue (₹)')
-            plt.xticks(range(len(client_revenue)), client_revenue.index, rotation=45)
+            plt.title('👥 Top Client Performance', fontsize=18, fontweight='bold', pad=20)
+            plt.xlabel('Clients', fontsize=14)
+            plt.ylabel('Revenue (₹)', fontsize=14)
+            
+            # Improve x-axis labels
+            client_names = [name[:15] + '...' if len(name) > 15 else name for name in client_revenue.index]
+            plt.xticks(range(len(client_revenue)), client_names, rotation=45, ha='right')
             
             # Add value labels on bars
             for bar, value in zip(bars, client_revenue.values):
-                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + value*0.01, 
-                        f'₹{value:,.0f}', ha='center', va='bottom')
+                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + max(client_revenue.values)*0.01, 
+                        f'₹{value:,.0f}', ha='center', va='bottom', fontweight='bold')
+            
+            # Add grid for better readability
+            plt.grid(True, alpha=0.3, axis='y')
             
             plt.tight_layout()
             
             chart_path = os.path.join(DATA_DIR, 'client_performance.png')
-            plt.savefig(chart_path, dpi=300, bbox_inches='tight')
+            plt.savefig(chart_path, dpi=300, bbox_inches='tight', facecolor='white')
             plt.close()
             
-            logger.info("👥 Client performance chart created")
+            logger.info(f"👥 Client performance chart created with {len(client_revenue)} clients")
             return chart_path
             
         except Exception as e:
@@ -1019,25 +1176,56 @@ class AdvancedAnalytics:
     def _create_location_analysis_chart(self, df: pd.DataFrame) -> Optional[str]:
         """📍 Create location analysis chart"""
         try:
-            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+            # Use flexible column names
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
             
-            # Revenue by location
-            location_revenue = df.groupby('location')['amount'].sum().sort_values(ascending=True)
-            ax1.barh(range(len(location_revenue)), location_revenue.values, 
-                    color=plt.cm.viridis(np.linspace(0, 1, len(location_revenue))))
-            ax1.set_yticks(range(len(location_revenue)))
-            ax1.set_yticklabels(location_revenue.index)
-            ax1.set_title('📍 Revenue by Location', fontweight='bold')
-            ax1.set_xlabel('Revenue (₹)')
+            # Check if orders column exists, otherwise count transactions
+            has_orders = 'Orders' in df.columns or 'orders' in df.columns
+            orders_col = 'Orders' if 'Orders' in df.columns else 'orders'
             
-            # Orders by location
-            location_orders = df.groupby('location')['orders'].sum().sort_values(ascending=True)
-            ax2.barh(range(len(location_orders)), location_orders.values,
-                    color=plt.cm.plasma(np.linspace(0, 1, len(location_orders))))
-            ax2.set_yticks(range(len(location_orders)))
-            ax2.set_yticklabels(location_orders.index)
-            ax2.set_title('📦 Orders by Location', fontweight='bold')
-            ax2.set_xlabel('Orders')
+            if has_orders:
+                # Two-panel chart with revenue and orders
+                fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+                
+                # Revenue by location
+                location_revenue = df.groupby(location_col)[amount_col].sum().sort_values(ascending=True)
+                ax1.barh(range(len(location_revenue)), location_revenue.values, 
+                        color=plt.cm.viridis(np.linspace(0, 1, len(location_revenue))))
+                ax1.set_yticks(range(len(location_revenue)))
+                ax1.set_yticklabels(location_revenue.index)
+                ax1.set_title('📍 Revenue by Location', fontweight='bold')
+                ax1.set_xlabel('Revenue (₹)')
+                
+                # Orders by location
+                location_orders = df.groupby(location_col)[orders_col].sum().sort_values(ascending=True)
+                ax2.barh(range(len(location_orders)), location_orders.values,
+                        color=plt.cm.plasma(np.linspace(0, 1, len(location_orders))))
+                ax2.set_yticks(range(len(location_orders)))
+                ax2.set_yticklabels(location_orders.index)
+                ax2.set_title('📦 Orders by Location', fontweight='bold')
+                ax2.set_xlabel('Orders')
+            else:
+                # Single panel with revenue and transaction count
+                fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+                
+                # Revenue by location
+                location_revenue = df.groupby(location_col)[amount_col].sum().sort_values(ascending=True)
+                ax1.barh(range(len(location_revenue)), location_revenue.values, 
+                        color=plt.cm.viridis(np.linspace(0, 1, len(location_revenue))))
+                ax1.set_yticks(range(len(location_revenue)))
+                ax1.set_yticklabels(location_revenue.index)
+                ax1.set_title('📍 Revenue by Location', fontweight='bold')
+                ax1.set_xlabel('Revenue (₹)')
+                
+                # Transaction count by location
+                location_count = df.groupby(location_col).size().sort_values(ascending=True)
+                ax2.barh(range(len(location_count)), location_count.values,
+                        color=plt.cm.plasma(np.linspace(0, 1, len(location_count))))
+                ax2.set_yticks(range(len(location_count)))
+                ax2.set_yticklabels(location_count.index)
+                ax2.set_title('📊 Transactions by Location', fontweight='bold')
+                ax2.set_xlabel('Transaction Count')
             
             plt.tight_layout()
             
@@ -1058,9 +1246,14 @@ class AdvancedAnalytics:
             if 'date' not in df.columns or 'weekday' not in df.columns:
                 return None
             
+            # Use flexible column names
+            amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+            client_col = 'Client' if 'Client' in df.columns else 'client'
+            location_col = 'Location' if 'Location' in df.columns else 'location'
+            
             # Create day-hour heatmap if hour data is available
             if 'hour' in df.columns and not df['hour'].isna().all():
-                pivot_data = df.groupby(['weekday', 'hour'])['amount'].sum().unstack(fill_value=0)
+                pivot_data = df.groupby(['weekday', 'hour'])[amount_col].sum().unstack(fill_value=0)
                 
                 plt.figure(figsize=(14, 8))
                 sns.heatmap(pivot_data, annot=True, fmt='.0f', cmap='YlOrRd', 
@@ -1070,7 +1263,7 @@ class AdvancedAnalytics:
                 plt.ylabel('Day of Week')
             else:
                 # Fallback: client-location heatmap
-                pivot_data = df.groupby(['client', 'location'])['amount'].sum().unstack(fill_value=0)
+                pivot_data = df.groupby([client_col, location_col])[amount_col].sum().unstack(fill_value=0)
                 
                 # Show only top 10 clients and locations to avoid clutter
                 pivot_data = pivot_data.head(10).iloc[:, :10]
@@ -1126,6 +1319,25 @@ class AdvancedAnalytics:
             logger.error(f"❌ Correlation matrix failed: {e}")
             return None
 
+    # ═══════════════════════════════════════════════════════════════
+    # 🔧 PARALLEL PROCESSOR COMPATIBILITY WRAPPERS
+    # ═══════════════════════════════════════════════════════════════
+    
+    def _create_revenue_trend_chart_for_user(self, user_id: int) -> Optional[str]:
+        """📈 User-specific revenue trend chart wrapper"""
+        df = self.load_fresh_data(user_id)
+        return self._create_revenue_trend_chart(df)
+    
+    def _create_client_performance_chart_for_user(self, user_id: int) -> Optional[str]:
+        """👥 User-specific client performance chart wrapper"""
+        df = self.load_fresh_data(user_id)
+        return self._create_client_performance_chart(df)
+    
+    def _create_location_analysis_chart_for_user(self, user_id: int) -> Optional[str]:
+        """📍 User-specific location analysis chart wrapper"""
+        df = self.load_fresh_data(user_id)
+        return self._create_location_analysis_chart(df)
+
 
 # ═══════════════════════════════════════════════════════════════
 # 🚀 GLOBAL INSTANCE & LEGACY COMPATIBILITY
@@ -1144,8 +1356,12 @@ def generate_sales_chart(df, output_file='sales_chart.png'):
     """Legacy function - use analytics_engine.generate_advanced_charts() instead"""
     logger.warning("⚠️ Using legacy generate_sales_chart() - consider upgrading to analytics_engine")
     try:
-        if 'client' in df.columns and 'amount' in df.columns:
-            sales = df.groupby('client')['amount'].sum()
+        # Use flexible column names for backward compatibility
+        client_col = 'Client' if 'Client' in df.columns else 'client'
+        amount_col = 'Amount' if 'Amount' in df.columns else 'amount'
+        
+        if client_col in df.columns and amount_col in df.columns:
+            sales = df.groupby(client_col)[amount_col].sum()
             plt.figure(figsize=(8, 4))
             sales.plot(kind='bar')
             plt.title('Sales by Client')
@@ -1158,3 +1374,40 @@ def generate_sales_chart(df, output_file='sales_chart.png'):
     except Exception as e:
         logger.error(f"❌ Legacy chart generation failed: {e}")
     return None
+
+    # ═══════════════════════════════════════════════════════════════
+    # 🔧 PARALLEL CHART GENERATION METHODS (USER-SPECIFIC)
+    # ═══════════════════════════════════════════════════════════════
+    
+    def _create_revenue_trend_chart_for_user(self, user_id: int) -> Optional[str]:
+        """📈 Create revenue trend chart for specific user"""
+        try:
+            df = self.load_fresh_data(user_id)
+            if df.empty:
+                return None
+            return self._create_revenue_trend_chart(df)
+        except Exception as e:
+            logger.error(f"❌ User revenue chart failed: {e}")
+            return None
+    
+    def _create_client_performance_chart_for_user(self, user_id: int) -> Optional[str]:
+        """👥 Create client performance chart for specific user"""
+        try:
+            df = self.load_fresh_data(user_id)
+            if df.empty:
+                return None
+            return self._create_client_performance_chart(df)
+        except Exception as e:
+            logger.error(f"❌ User client chart failed: {e}")
+            return None
+    
+    def _create_location_analysis_chart_for_user(self, user_id: int) -> Optional[str]:
+        """📍 Create location analysis chart for specific user"""
+        try:
+            df = self.load_fresh_data(user_id)
+            if df.empty:
+                return None
+            return self._create_location_analysis_chart(df)
+        except Exception as e:
+            logger.error(f"❌ User location chart failed: {e}")
+            return None

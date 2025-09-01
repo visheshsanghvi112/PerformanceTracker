@@ -445,6 +445,7 @@ async def charts_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         if not chart_files:
             # Fallback to regular chart generation
+            from analytics import analytics_engine
             chart_files = analytics_engine.generate_advanced_charts(user.id)
         
         if not chart_files:
@@ -914,8 +915,7 @@ Try saying: "Sold 10 medicines to City Hospital for ₹15000 urgent delivery"
 """
     
     await update.message.reply_text(help_text, parse_mode='Markdown')
-@rat
-e_limit(calls_per_minute=5)
+@rate_limit(calls_per_minute=5)
 @handle_errors(notify_user=True)
 async def top_performers_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """🏆 Top Performers Analysis with Location Intelligence"""

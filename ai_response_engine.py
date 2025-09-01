@@ -2,11 +2,13 @@
 """
 🤖 AI RESPONSE ENGINE
 ====================
-Intelligent response generation for user interactions and business insights
+Intelligent response generation using specialized API keys for optimal performance
 """
 
 import random
 import datetime
+import asyncio
+import json
 from typing import Dict, List, Any, Optional
 from logger import logger
 
@@ -64,8 +66,35 @@ class AIResponseEngine:
                 "🌟 Territory expansion - excellent business development!"
             ]
         }
-        
         logger.info("🤖 AI Response Engine initialized")
+    
+    def _clean_and_parse_json(self, response_text: str) -> dict | None:
+        """Clean and parse JSON response with enhanced error handling"""
+        try:
+            if not response_text or not response_text.strip():
+                logger.warning("🚫 Empty response received")
+                return None
+            
+            # Clean the response
+            cleaned_text = response_text.strip()
+            
+            # Remove code block markers if present
+            if cleaned_text.startswith("```"):
+                cleaned_text = cleaned_text.strip("`").strip()
+                if cleaned_text.lower().startswith("json"):
+                    cleaned_text = cleaned_text[4:].strip()
+            
+            # Try to parse JSON
+            parsed = json.loads(cleaned_text)
+            logger.info("✅ JSON parsed successfully")
+            return parsed
+            
+        except json.JSONDecodeError as e:
+            logger.warning(f"❌ JSON parsing failed: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"❌ Unexpected error in JSON parsing: {e}")
+            return None
     
     def generate_success_response(self, entry_type: str, entry_data: Dict[str, Any]) -> str:
         """Generate intelligent success response based on entry data"""
@@ -266,6 +295,129 @@ class AIResponseEngine:
         ]
         
         return random.choice(tips)
+    
+    async def generate_ai_powered_response(self, user_message: str, context: str = "general") -> str:
+        """
+        🚀 Generate AI-powered responses using specialized API keys
+        Uses the dedicated casual chat API key for natural conversations
+        """
+        try:
+            if context == "casual" or self._is_casual_message(user_message):
+                # Use specialized casual chat API key
+                response = await self._generate_casual_response_internal(user_message)
+                logger.info("🗨️ Generated casual response using dedicated chat API key")
+                return response
+            else:
+                # Use template-based responses for business interactions
+                return self.generate_contextual_response(user_message, context)
+                
+        except Exception as e:
+            logger.error(f"🤖 AI response generation failed: {e}")
+            return "I'm here to help! Please let me know what you'd like to track today."
+    
+    async def _generate_casual_response_internal(self, text: str) -> str:
+        """Generate casual chat response using dedicated chat API key"""
+        try:
+            # Import here to avoid circular imports
+            from gemini_parser import smart_api_manager
+            
+            chat_prompt = f"""
+You are a friendly business assistant. Respond to this casual message naturally and helpfully.
+Keep it brief, professional but warm. If they're asking about business data, guide them to use proper commands.
+
+User message: {text}
+
+Response:"""
+            
+            response = await smart_api_manager.generate_content_specialized(chat_prompt, "casual_chat")
+            return response.strip()
+            
+        except Exception as e:
+            logger.error(f"❌ Casual chat generation failed: {e}")
+            return "I'm having trouble responding right now. Please try again or use /help for commands."
+    
+    async def generate_command_insights(self, command_data: Dict[str, Any]) -> str:
+        """
+        📊 Generate command analysis using specialized analytics API key
+        Uses the dedicated command processing API key for analytics
+        """
+        try:
+            # Import here to avoid circular imports
+            from gemini_parser import smart_api_manager
+            
+            analysis_prompt = f"""
+Analyze this command data and provide insights:
+{json.dumps(command_data, indent=2)}
+
+Return JSON with:
+{{
+    "summary": "Brief command summary",
+    "insights": ["insight1", "insight2"],
+    "recommendations": ["rec1", "rec2"]
+}}"""
+            
+            response = await smart_api_manager.generate_content_specialized(analysis_prompt, "command_processing")
+            
+            # Clean and parse the response
+            response_cleaned = response.strip()
+            if response_cleaned.startswith("```"):
+                # Remove markdown code blocks
+                response_cleaned = response_cleaned.strip("`").strip()
+                if response_cleaned.lower().startswith("json"):
+                    response_cleaned = response_cleaned[4:].strip()
+            
+            # Validate response before parsing
+            if not response_cleaned or len(response_cleaned) < 10:
+                logger.warning("⚠️ Empty or too short response from API")
+                return "📊 Command processed successfully!"
+            
+            try:
+                analysis = json.loads(response_cleaned)
+            except json.JSONDecodeError as je:
+                logger.warning(f"⚠️ JSON parsing failed, using fallback: {je}")
+                return "📊 Command analysis completed - API response format issue!"
+            
+            response_parts = []
+            if analysis.get("summary"):
+                response_parts.append(f"📋 **Summary:** {analysis['summary']}")
+            
+            if analysis.get("insights"):
+                insights_text = "\n".join([f"  • {insight}" for insight in analysis["insights"]])
+                response_parts.append(f"💡 **Insights:**\n{insights_text}")
+            
+            if analysis.get("recommendations"):
+                recs_text = "\n".join([f"  • {rec}" for rec in analysis["recommendations"]])
+                response_parts.append(f"🎯 **Recommendations:**\n{recs_text}")
+            
+            if response_parts:
+                result = "\n\n".join(response_parts)
+                logger.info("📊 Generated command insights using dedicated analytics API key")
+                return result
+            else:
+                return "📊 Analysis completed successfully!"
+                
+        except Exception as e:
+            logger.error(f"📊 Command insights generation failed: {e}")
+            return "📊 Command processed successfully!"
+    
+    def _is_casual_message(self, message: str) -> bool:
+        """Detect if message is casual conversation vs business data"""
+        casual_indicators = [
+            "hi", "hello", "hey", "how are you", "thanks", "thank you",
+            "good morning", "good evening", "bye", "goodbye", "ok", "okay"
+        ]
+        
+        message_lower = message.lower()
+        return any(indicator in message_lower for indicator in casual_indicators)
+    
+    def generate_contextual_response(self, message: str, context: str) -> str:
+        """Generate contextual response using templates"""
+        if context == "greeting":
+            return random.choice(self.response_templates['greeting'])
+        elif context == "encouragement":
+            return random.choice(self.response_templates['encouragement'])
+        else:
+            return "I'm here to help with your business tracking!"
 
 # Global instance
 ai_response_engine = AIResponseEngine()

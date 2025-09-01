@@ -13,6 +13,7 @@ from functools import partial
 import time
 
 from logger import logger
+from functools import wraps
 
 class ParallelProcessor:
     """⚡ High-performance parallel processing engine"""
@@ -198,7 +199,7 @@ class ParallelProcessor:
             logger.error(f"⚡ Geocoding batch error: {e}")
             return []
     
-    def process_chart_generation_parallel(self, chart_configs: List[Dict[str, Any]]) -> List[str]:
+    async def process_chart_generation_parallel(self, chart_configs: List[Dict[str, Any]]) -> List[str]:
         """Generate multiple charts in parallel"""
         try:
             logger.info(f"⚡ Generating {len(chart_configs)} charts in parallel")
@@ -206,19 +207,40 @@ class ParallelProcessor:
             def generate_chart(config):
                 try:
                     from analytics import analytics_engine
-                    # This would call specific chart generation methods
-                    # Implementation depends on chart type
-                    return f"chart_{config.get('type', 'default')}_{int(time.time())}.png"
+                    
+                    chart_type = config.get('type', 'default')
+                    user_id = config.get('user_id')
+                    
+                    # Generate specific chart based on type
+                    if chart_type == 'revenue_trend':
+                        return analytics_engine._create_revenue_trend_chart_for_user(user_id)
+                    elif chart_type == 'client_performance':
+                        return analytics_engine._create_client_performance_chart_for_user(user_id)
+                    elif chart_type == 'location_analysis':
+                        return analytics_engine._create_location_analysis_chart_for_user(user_id)
+                    else:
+                        # Fallback to general chart generation
+                        charts = analytics_engine.generate_advanced_charts(user_id)
+                        return charts[0] if charts else None
+                        
                 except Exception as e:
-                    logger.error(f"⚡ Chart generation error: {e}")
+                    logger.error(f"⚡ Chart generation error for {config}: {e}")
                     return None
             
-            # Generate charts in parallel
-            with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-                chart_paths = list(executor.map(generate_chart, chart_configs))
+            # Generate charts in parallel using asyncio
+            loop = asyncio.get_event_loop()
+            tasks = [
+                loop.run_in_executor(self.thread_pool, generate_chart, config)
+                for config in chart_configs
+            ]
             
-            # Filter out failed generations
-            successful_charts = [path for path in chart_paths if path]
+            chart_paths = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Filter out failed generations and exceptions
+            successful_charts = [
+                path for path in chart_paths 
+                if path and not isinstance(path, Exception) and isinstance(path, str)
+            ]
             
             logger.info(f"⚡ Chart generation completed: {len(successful_charts)} charts")
             return successful_charts
@@ -243,8 +265,8 @@ class ParallelProcessor:
         except:
             pass
 
-# Global instance
-parallel_processor = ParallelProcessor()r(f"⚡ Error during shutdown: {e}")
+    # Global instance
+parallel_processor = ParallelProcessor()
 
 # Decorator for parallel processing
 def parallel_process(max_workers: int = 4):

@@ -34,13 +34,14 @@ class LocationStorage:
             if user_id not in data:
                 data[user_id] = {}
             
-            # Store location data for the company
-            data[user_id][company_id] = {
-                'coordinates': location_data.get('coordinates', {}),
-                'address': location_data.get('address', {}),
+            # Store location data for the company (preserve all input fields)
+            stored_data = location_data.copy()  # Keep all original fields
+            stored_data.update({
                 'timestamp': location_data.get('timestamp', datetime.datetime.now().isoformat()),
                 'last_updated': datetime.datetime.now().isoformat()
-            }
+            })
+            
+            data[user_id][company_id] = stored_data
             
             # Save data
             with open(self.storage_file, 'w') as f:

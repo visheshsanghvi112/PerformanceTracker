@@ -158,6 +158,32 @@ class InputProcessor:
         """
         logger.debug(f"🔄 Generating fallback response for: '{text[:30]}...'")
         
+    def get_parsing_failure_response(self, user_type: str = "sales") -> str:
+        """
+        Generate response for parsing failures with structured format help
+        """
+        logger.debug(f"🔄 Generating parsing failure response for {user_type}")
+        
+        base_response = (
+            "🔧 **Unable to parse your message automatically.**\n\n"
+            "📋 Please use this format:\n"
+            "```\n"
+            "Client: [Customer Name]\n"
+            "Location: [Area/City]\n"
+            "Orders: [Number of items]\n"
+            "Amount: [₹Amount]\n"
+            "Remarks: [Any additional notes]\n"
+            "```\n\n"
+            "💡 Example:\n"
+            "`Client: Apollo Pharmacy\n"
+            "Location: Mumbai\n"
+            "Orders: 5\n"
+            "Amount: ₹5000\n"
+            "Remarks: Regular order`"
+        )
+        
+        return base_response
+        
         response = """I understand you're trying to record a transaction, but I need it in a clearer format.
 
 📋 **Please use this structure:**
