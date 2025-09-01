@@ -4020,4 +4020,4 @@ Scale & Performance:
 
 *Built with ❤️ using Python, Telegram Bot API, Google Gemini AI, and Google Sheets*
 
-**🚀 READY FOR PRODUCTION DEPLOYMENT**
+**🚀 READY FOR PRODUCTION DEPLOYMENT BY VISHESH SANGHVI**
