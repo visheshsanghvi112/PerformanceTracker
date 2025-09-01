@@ -141,7 +141,9 @@ uvicorn==0.24.0              # ASGI server - High-performance async web server
 # ===== SECURITY & ENVIRONMENT =====
 # Military-grade security and environment management
 # Zero vulnerabilities detected in security audit
-cryptography==41.0.8         # Cryptographic operations - Secure data handling
+cryptography==45.0.6
+
+# Cryptographic operations - Secure data handling
 certifi==2023.11.17          # SSL certificates - Trusted certificate authority bundle
 
 # ===== IMAGE PROCESSING =====
