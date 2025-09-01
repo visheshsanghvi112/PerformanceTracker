@@ -112,7 +112,11 @@ requests==2.31.0             # HTTP client - API calls, geocoding, external serv
 # Optional advanced AI/ML capabilities - Cutting-edge technology
 # Only install if you need advanced NLP features (adds ~3GB)
 transformers==4.36.2         # Hugging Face transformers - BERT, GPT models, NLP pipeline
-torch==2.1.2                 # PyTorch framework - Deep learning, neural networks
+torch==2.4.1
+torchvision==0.19.1
+torchaudio==2.4.1
+                 
+# PyTorch framework - Deep learning, neural networks
 datasets==2.16.1             # Hugging Face datasets - ML dataset management
 
 # ===== NATURAL LANGUAGE PROCESSING =====
