@@ -154,27 +154,51 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 return
 
-        # 1. Handle casual greetings with AI-powered responses
-        casual_starts = ['hi', 'hello', 'hey', 'yo', 'good morning', 'good evening']
-        if text.lower() in casual_starts or len(text.split()) < 3:
-            logger.info(f"💬 Responding to casual greeting from user {user.id}")
-            current_company = company_manager.get_user_company(user.id)
-            company_info = company_manager.get_company_info(current_company)
+        # 1. Handle casual conversation with REAL AI intelligence
+        casual_conversation_patterns = [
+            'it is evening', 'this is evening', 'good evening', 'evening time',
+            'it is morning', 'this is morning', 'morning time', 
+            'it is afternoon', 'this is afternoon', 'afternoon time',
+            'what time', 'current time', 'time now', 'how are you',
+            'thank you', 'thanks', 'bye', 'goodbye', 'see you',
+            'weather', 'how is everything', 'all good', 'fine',
+            'nice', 'great', 'cool', 'awesome', 'perfect',
+            'busy', 'tired', 'good day', 'bad day', 'working'
+        ]
+        
+        text_lower = text.lower()
+        is_casual_conversation = any(pattern in text_lower for pattern in casual_conversation_patterns)
+        
+        # Also detect short conversational messages
+        if not is_casual_conversation and len(text.split()) <= 5:
+            # Check if it's not business data (no numbers, amounts, or business keywords)
+            business_indicators = ['sold', 'bought', 'purchase', 'client', 'pharmacy', 'hospital', '₹', 'rupees', 'amount']
+            has_business_indicators = any(indicator in text_lower for indicator in business_indicators)
+            if not has_business_indicators and not text.lower().startswith('/'):
+                is_casual_conversation = True
+        
+        if is_casual_conversation:
+            logger.info(f"🤖 Using REAL AI for casual conversation from user {user.id}: {text}")
             
-            # Generate AI-powered greeting
-            ai_greeting = ai_response_engine.generate_greeting_response(user.first_name)
-            
-            await update.message.reply_text(
-                f"{ai_greeting}\n\n"
-                f"🏢 **Welcome to {company_info['display_name']}!**\n\n"
-                "🤖 **AI-Powered Options:**\n"
-                "• `/sales` - Log sales with natural language\n"
-                "• `/purchase` - Log purchases with AI parsing\n"
-                "• `/location` - Share GPS for territory insights\n"
-                "• `/dashboard` - View AI analytics\n\n"
-                "💡 **Try natural language:** 'Sold 5 tablets to Apollo for ₹25000'"
-            )
-            return
+            # Use Gemini AI for truly intelligent conversation with memory
+            try:
+                ai_response = ai_response_engine.generate_intelligent_conversation(
+                    text, 
+                    user.id,  # User ID for conversation memory
+                    user.first_name, 
+                    context="casual_chat"
+                )
+                logger.info(f"✅ Generated intelligent AI response with memory for casual conversation")
+                await update.message.reply_text(ai_response)
+                return
+            except Exception as e:
+                logger.error(f"❌ AI conversation failed, using fallback: {e}")
+                # Fallback to simple response
+                await update.message.reply_text(
+                    f"Thanks for chatting {user.first_name}! 😊 I'm here to help with your business tracking needs. "
+                    "Try `/sales` or `/purchase` when you're ready!"
+                )
+                return
 
         # 2. Get user's log type (sales or purchase)
         user_type = context.user_data.get('type')

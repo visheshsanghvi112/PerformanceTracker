@@ -3543,3 +3543,785 @@ AttributeError: 'InputProcessor' object has no attribute 'get_parsing_failure_re
 2025-09-01 15:08:26,232 | INFO     | _create_client_performance_chart:1169 | 👥 Client performance chart created with 6 clients
 2025-09-01 15:08:26,468 | INFO     | _create_location_analysis_chart:1236 | 📍 Location analysis chart created
 2025-09-01 15:08:26,468 | INFO     | generate_advanced_charts:743  | ✅ Successfully generated 3 charts
+2025-09-01 16:57:54,084 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 16:57:54,085 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 16:57:54,085 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 16:57:54,086 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 16:57:54,086 | INFO     | __init__            :69   | 🤖 AI Response Engine initialized
+2025-09-01 16:58:01,376 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 16:58:01,377 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 16:58:01,377 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 16:58:01,377 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 16:58:01,380 | INFO     | __init__            :69   | 🤖 AI Response Engine initialized
+2025-09-01 16:58:26,666 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 16:58:26,666 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 16:58:26,667 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 16:58:26,667 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 16:58:26,667 | INFO     | __init__            :69   | 🤖 AI Response Engine initialized
+2025-09-01 16:58:26,668 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 16:58 (Hour: 16) -> 🌆 Good evening!
+2025-09-01 16:59:26,185 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 16:59:26,186 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 16:59:26,186 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 16:59:26,187 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 16:59:26,187 | INFO     | __init__            :69   | 🤖 AI Response Engine initialized
+2025-09-01 16:59:26,188 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 08:00 (Hour: 8) -> 🌅 Good morning!
+2025-09-01 16:59:26,188 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 13:00 (Hour: 13) -> ☀️ Good afternoon!
+2025-09-01 16:59:26,189 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 16:00 (Hour: 16) -> 🌆 Good evening!
+2025-09-01 16:59:26,189 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 17:00 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 16:59:26,189 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 20:00 (Hour: 20) -> 🌆 Good evening!
+2025-09-01 16:59:26,190 | INFO     | generate_greeting_response:168  | 🕐 Greeting generated at 22:00 (Hour: 22) -> 🌙 Good night!
+2025-09-01 17:01:52,069 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:01:52,070 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:01:52,070 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:01:52,071 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:01:52,071 | INFO     | __init__            :81   | 🤖 AI Response Engine initialized
+2025-09-01 17:04:28,843 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:04:28,843 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:04:28,844 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:04:28,844 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:04:28,844 | INFO     | __init__            :81   | 🤖 AI Response Engine initialized
+2025-09-01 17:04:30,980 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:04:36,255 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:04:39,784 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:04:44,006 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:04:47,556 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:04:51,876 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:04:57,339 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:05:01,276 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:05:04,600 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:05:08,507 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:05:13,385 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using secondary
+2025-09-01 17:05:13,388 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:13,724 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 46
+}
+]
+2025-09-01 17:05:13,726 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:15,028 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 45
+}
+]
+2025-09-01 17:05:15,030 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:15,353 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 45
+}
+]
+2025-09-01 17:05:15,354 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:16,607 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 44
+}
+]
+2025-09-01 17:05:16,609 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:21,037 | INFO     | generate_intelligent_conversation:504  | 🤖 Generated intelligent conversation response using primary
+2025-09-01 17:05:21,038 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:21,366 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 39
+}
+]
+2025-09-01 17:05:21,367 | INFO     | get_model_for_task  :82   | 🔄 Using primary key as fallback for casual_conversation
+2025-09-01 17:05:22,622 | ERROR    | generate_intelligent_conversation:508  | � Intelligent conversation generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 37
+}
+]
+2025-09-01 17:12:35,865 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:12:35,866 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:12:35,866 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:12:35,866 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:12:39,037 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:12:39,042 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:12:39,044 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:12:39,051 | INFO     | __init__            :81   | 🤖 AI Response Engine initialized
+2025-09-01 17:12:39,055 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:12:40,297 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:12:40,298 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:12:42,749 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:12:43,227 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:12:43,228 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:12:43,601 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:12:44,016 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:12:44,475 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:12:44,994 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:12:44,999 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:12:45,002 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:12:45,003 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:12:45,004 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:12:45,009 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:12:45,033 | INFO     | check_system_health :83   | 🔍 Performing system health checks...
+2025-09-01 17:12:45,453 | WARNING  | check_system_health :103  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:12:45,454 | INFO     | check_system_health :105  | ✅ System health check completed
+2025-09-01 17:12:46,117 | INFO     | main                :201  | ⏰ Scheduler initialized successfully
+2025-09-01 17:12:46,120 | INFO     | main                :208  | 🏥 Health check server started on port 5000
+2025-09-01 17:12:46,121 | INFO     | main                :209  | 👨‍💻 CI/CD monitoring enabled by Vishesh Sanghvi
+2025-09-01 17:12:46,122 | INFO     | main                :214  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:12:46,122 | INFO     | main                :215  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:12:46,123 | INFO     | main                :216  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:12:46,124 | INFO     | main                :217  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:12:46,125 | DEBUG    | main                :220  | 🔧 System Configuration:
+2025-09-01 17:12:46,125 | DEBUG    | main                :221  |    📁 Data directory: data
+2025-09-01 17:12:46,125 | DEBUG    | main                :222  |    🗂️ Log files: bot.log
+2025-09-01 17:12:46,125 | DEBUG    | main                :223  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:12:46,516 | DEBUG    | main                :224  |    📊 Google Sheets: Enabled
+2025-09-01 17:12:46,517 | DEBUG    | main                :225  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:12:46,517 | INFO     | main                :228  | 🔄 Starting bot polling...
+2025-09-01 17:21:18,838 | INFO     | main                :235  | 🛑 Bot stopped by user
+2025-09-01 17:22:01,548 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:22:01,548 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:22:01,548 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:22:01,549 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:22:01,549 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:22:03,260 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:22:05,158 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 123
+2025-09-01 17:22:05,159 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:22:09,506 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 123
+2025-09-01 17:22:09,507 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:22:28,341 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:22:28,341 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:22:28,342 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:22:28,343 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:22:32,199 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:22:32,202 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:22:32,202 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:22:32,208 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:22:32,210 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:22:33,585 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:22:33,587 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:22:35,692 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:22:36,155 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:22:36,156 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:22:36,591 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:22:37,038 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:22:37,470 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:22:37,924 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:22:37,940 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:22:37,940 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:22:37,940 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:22:37,940 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:22:37,955 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:22:37,971 | INFO     | check_system_health :83   | 🔍 Performing system health checks...
+2025-09-01 17:22:38,441 | WARNING  | check_system_health :103  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:22:38,441 | INFO     | check_system_health :105  | ✅ System health check completed
+2025-09-01 17:22:39,049 | INFO     | main                :201  | ⏰ Scheduler initialized successfully
+2025-09-01 17:22:39,049 | INFO     | main                :208  | 🏥 Health check server started on port 5000
+2025-09-01 17:22:39,065 | INFO     | main                :209  | 👨‍💻 CI/CD monitoring enabled by Vishesh Sanghvi
+2025-09-01 17:22:39,065 | INFO     | main                :214  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:22:39,065 | INFO     | main                :215  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:22:39,066 | INFO     | main                :216  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:22:39,066 | INFO     | main                :217  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:22:39,066 | DEBUG    | main                :220  | 🔧 System Configuration:
+2025-09-01 17:22:39,066 | DEBUG    | main                :221  |    📁 Data directory: data
+2025-09-01 17:22:39,067 | DEBUG    | main                :222  |    🗂️ Log files: bot.log
+2025-09-01 17:22:39,067 | DEBUG    | main                :223  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:22:39,519 | DEBUG    | main                :224  |    📊 Google Sheets: Enabled
+2025-09-01 17:22:39,519 | DEBUG    | main                :225  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:22:39,519 | INFO     | main                :228  | 🔄 Starting bot polling...
+2025-09-01 17:25:43,368 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:25:43,368 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:25:43,368 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:25:43,369 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:25:46,015 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:25:46,018 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:25:46,018 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:25:46,019 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:25:46,021 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:25:47,028 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:25:47,029 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:25:48,857 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:25:49,219 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:25:49,219 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:25:49,695 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:25:50,144 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:25:50,575 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:25:51,028 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:25:51,031 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:25:51,033 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:25:51,034 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:25:51,034 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:25:51,037 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:26:13,803 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:26:13,803 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:26:13,804 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:26:13,805 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:26:16,547 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:26:16,549 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:26:16,549 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:26:16,550 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:26:16,551 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:26:17,593 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:26:17,594 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:26:19,613 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:26:20,063 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:26:20,064 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:26:20,501 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:26:20,880 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:26:21,365 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:26:21,831 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:26:21,834 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:26:21,836 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:26:21,836 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:26:21,837 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:26:21,842 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:26:21,851 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:26:24,532 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 456
+2025-09-01 17:26:24,533 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:29:35,437 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:29:35,450 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:29:35,450 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:29:35,450 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:29:38,171 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:29:38,176 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:29:38,178 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:29:38,180 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:29:38,181 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:29:39,882 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:29:39,883 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:29:41,697 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:29:42,076 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:29:42,077 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:29:42,479 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:29:42,854 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:29:43,236 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:29:43,700 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:29:43,708 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:29:43,712 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:29:43,714 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:29:43,714 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:29:43,719 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:29:45,190 | INFO     | __init__            :36   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-09-01 17:29:45,192 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:29:48,034 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 789
+2025-09-01 17:29:48,034 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:29:48,036 | INFO     | load_fresh_data     :51   | 🔄 Fetching fresh data for user 1201911108...
+2025-09-01 17:29:48,037 | INFO     | load_fresh_data     :59   | 📊 Loading data for company: yugrow
+2025-09-01 17:29:48,454 | INFO     | get_company_records :177  | 📊 Retrieved 11 records from yugrow sheet
+2025-09-01 17:29:48,455 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.417 seconds
+2025-09-01 17:29:48,455 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.418 seconds
+2025-09-01 17:29:48,463 | WARNING  | load_fresh_data     :75   | ⚠️ No user_id column found - showing all data (PRIVACY RISK!)
+2025-09-01 17:29:48,464 | DEBUG    | _clean_and_normalize_data:94   | 🔍 Available columns: ['Entry ID', 'Date', 'User Name', 'Type', 'Client', 'Location', 'Orders', 'Amount', 'Remarks', 'User ID', 'Time', 'Company', 'Entry Timestamp', 'Last Modified', 'Live_Position']
+2025-09-01 17:29:48,469 | INFO     | auto_learn_patterns :162  | 🧠 Auto-learned 2 client patterns
+2025-09-01 17:29:48,469 | INFO     | auto_learn_patterns :164  | 🧠 Auto-learned 2 location patterns
+2025-09-01 17:29:48,473 | INFO     | normalize_dataframe :192  | ✅ Normalized Client column
+2025-09-01 17:29:48,475 | INFO     | normalize_dataframe :198  | ✅ Normalized Location column
+2025-09-01 17:29:48,477 | DEBUG    | _clean_and_normalize_data:110  | ✅ Converted Amount to numeric
+2025-09-01 17:29:48,477 | DEBUG    | _clean_and_normalize_data:116  | ✅ Converted Orders to numeric
+2025-09-01 17:29:48,478 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Client text column
+2025-09-01 17:29:48,478 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Location text column
+2025-09-01 17:29:48,479 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Type text column
+2025-09-01 17:29:48,479 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Remarks text column
+2025-09-01 17:29:48,479 | INFO     | _clean_and_normalize_data:130  | 🧠 Using normalized client names for analytics
+2025-09-01 17:29:48,479 | INFO     | _clean_and_normalize_data:134  | 🧠 Using normalized location names for analytics
+2025-09-01 17:29:48,485 | INFO     | _clean_and_normalize_data:155  | 🧠 Smart normalization completed:
+🧠 SMART NORMALIZATION APPLIED:
+
+👥 CLIENT NORMALIZATIONS:
+   apollo ← Apollo Pharmacy, apollo pharmacy
+   fortis ← fortis hospital
+   cipla ← cipla warehouse
+   reliance ← reliance medical store
+
+2025-09-01 17:29:48,485 | DEBUG    | _clean_and_normalize_data:159  | 🧹 Data cleaned: 11 records with 22 columns
+2025-09-01 17:29:48,485 | INFO     | load_fresh_data     :83   | ✅ Loaded 11 records for user 1201911108
+2025-09-01 17:29:48,486 | INFO     | generate_advanced_charts:722  | 📊 Generating 3 professional charts for user 1201911108...
+2025-09-01 17:29:49,028 | INFO     | _create_revenue_trend_chart:1114 | 📈 Revenue trend chart created
+2025-09-01 17:29:49,266 | INFO     | _create_client_performance_chart:1169 | 👥 Client performance chart created with 6 clients
+2025-09-01 17:29:49,508 | INFO     | _create_location_analysis_chart:1236 | 📍 Location analysis chart created
+2025-09-01 17:29:49,508 | INFO     | generate_advanced_charts:743  | ✅ Successfully generated 3 charts
+2025-09-01 17:29:58,623 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:29:58,623 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:29:58,623 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:29:58,624 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:30:01,756 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:30:01,760 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:30:01,761 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:30:01,762 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:30:01,763 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:30:02,850 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:30:02,851 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:30:04,738 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:30:05,124 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:30:05,125 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:30:05,500 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:30:05,866 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:30:06,267 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:30:06,635 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:30:06,641 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:30:06,646 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:30:06,649 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:30:06,649 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:30:06,655 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:30:06,670 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-01 17:30:07,061 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:30:07,061 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-01 17:30:07,710 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-01 17:30:07,710 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:30:07,711 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:30:07,711 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:30:07,711 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:30:07,712 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-01 17:30:07,712 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-01 17:30:07,712 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-01 17:30:07,712 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:30:08,098 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-01 17:30:08,099 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:30:08,099 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-01 17:30:15,944 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'hey'
+2025-09-01 17:30:15,945 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'hey'
+2025-09-01 17:30:15,946 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:30:15,947 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:30:15,948 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:30 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:30:16,612 | INFO     | async_wrapper       :137  | handle_message executed in 0.667 seconds
+2025-09-01 17:30:18,897 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'babes'
+2025-09-01 17:30:18,898 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'babes'
+2025-09-01 17:30:18,898 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:30:18,899 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:30:18,900 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:30 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:30:19,256 | INFO     | async_wrapper       :137  | handle_message executed in 0.359 seconds
+2025-09-01 17:30:30,533 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'wassup'
+2025-09-01 17:30:30,534 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'wassup'
+2025-09-01 17:30:30,535 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:30:30,535 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:30:30,536 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:30 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:30:31,229 | INFO     | async_wrapper       :137  | handle_message executed in 0.696 seconds
+2025-09-01 17:31:24,828 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:31:24,828 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:31:24,829 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:31:24,829 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:31:27,472 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:31:27,476 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:31:27,476 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:31:27,477 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:31:27,478 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:31:28,562 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:31:28,563 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:31:30,516 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:31:30,932 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:31:30,933 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:31:31,415 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:31:31,893 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:31:32,263 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:31:32,645 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:31:32,646 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:31:32,646 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:31:32,656 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:31:32,656 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:31:32,660 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:31:32,673 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-01 17:31:33,102 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:31:33,103 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-01 17:31:33,699 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-01 17:31:33,699 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:31:33,699 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:31:33,700 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:31:33,700 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:31:33,700 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-01 17:31:33,700 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-01 17:31:33,700 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-01 17:31:33,700 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:31:34,100 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-01 17:31:34,101 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:31:34,101 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-01 17:31:58,432 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'hi'
+2025-09-01 17:31:58,433 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'hi'
+2025-09-01 17:31:58,433 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:31:58,434 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:31:58,435 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:31 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:31:59,069 | INFO     | async_wrapper       :137  | handle_message executed in 0.637 seconds
+2025-09-01 17:32:01,307 | INFO     | dashboard_command   :631  | 📊 Dashboard requested by user 1201911108
+2025-09-01 17:32:03,424 | INFO     | __init__            :36   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-09-01 17:32:03,424 | INFO     | __init__            :36   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-09-01 17:32:03,424 | INFO     | load_fresh_data     :51   | 🔄 Fetching fresh data for user 1201911108...
+2025-09-01 17:32:03,424 | INFO     | load_fresh_data     :59   | 📊 Loading data for company: yugrow
+2025-09-01 17:32:04,002 | INFO     | get_company_records :177  | 📊 Retrieved 11 records from yugrow sheet
+2025-09-01 17:32:04,002 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.579 seconds
+2025-09-01 17:32:04,002 | INFO     | sync_wrapper        :154  | get_all_records executed in 0.579 seconds
+2025-09-01 17:32:04,018 | WARNING  | load_fresh_data     :75   | ⚠️ No user_id column found - showing all data (PRIVACY RISK!)
+2025-09-01 17:32:04,018 | DEBUG    | _clean_and_normalize_data:94   | 🔍 Available columns: ['Entry ID', 'Date', 'User Name', 'Type', 'Client', 'Location', 'Orders', 'Amount', 'Remarks', 'User ID', 'Time', 'Company', 'Entry Timestamp', 'Last Modified', 'Live_Position']
+2025-09-01 17:32:04,024 | INFO     | auto_learn_patterns :162  | 🧠 Auto-learned 2 client patterns
+2025-09-01 17:32:04,024 | INFO     | auto_learn_patterns :164  | 🧠 Auto-learned 2 location patterns
+2025-09-01 17:32:04,024 | INFO     | normalize_dataframe :192  | ✅ Normalized Client column
+2025-09-01 17:32:04,024 | INFO     | normalize_dataframe :198  | ✅ Normalized Location column
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:110  | ✅ Converted Amount to numeric
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:116  | ✅ Converted Orders to numeric
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Client text column
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Location text column
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Type text column
+2025-09-01 17:32:04,024 | DEBUG    | _clean_and_normalize_data:124  | ✅ Cleaned Remarks text column
+2025-09-01 17:32:04,038 | INFO     | _clean_and_normalize_data:130  | 🧠 Using normalized client names for analytics
+2025-09-01 17:32:04,038 | INFO     | _clean_and_normalize_data:134  | 🧠 Using normalized location names for analytics
+2025-09-01 17:32:04,038 | INFO     | _clean_and_normalize_data:155  | 🧠 Smart normalization completed:
+🧠 SMART NORMALIZATION APPLIED:
+
+👥 CLIENT NORMALIZATIONS:
+   apollo ← Apollo Pharmacy, apollo pharmacy
+   fortis ← fortis hospital
+   cipla ← cipla warehouse
+   reliance ← reliance medical store
+
+2025-09-01 17:32:04,038 | DEBUG    | _clean_and_normalize_data:159  | 🧹 Data cleaned: 11 records with 22 columns
+2025-09-01 17:32:04,038 | INFO     | load_fresh_data     :83   | ✅ Loaded 11 records for user 1201911108
+2025-09-01 17:32:04,038 | INFO     | generate_executive_dashboard:199  | 📊 Generating executive dashboard for user 1201911108...
+2025-09-01 17:32:04,072 | INFO     | generate_executive_dashboard:249  | ✅ Executive dashboard generated successfully
+2025-09-01 17:32:04,072 | DEBUG    | load_fresh_data     :46   | 📊 Using cached analytics data for user 1201911108
+2025-09-01 17:32:04,072 | INFO     | generate_location_analytics:259  | 📍 Generating location analytics for user 1201911108...
+2025-09-01 17:32:04,088 | DEBUG    | _extract_gps_data   :343  | 📍 GPS extraction: 0 entries with GPS out of 11
+2025-09-01 17:32:04,110 | INFO     | generate_location_analytics:295  | ✅ Location analytics generated successfully
+2025-09-01 17:32:04,473 | INFO     | dashboard_command   :738  | 📊 Executive dashboard with location intelligence delivered to user 1201911108
+2025-09-01 17:35:23,575 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'ok cool'
+2025-09-01 17:35:23,576 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'ok cool'
+2025-09-01 17:35:23,576 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:35:23,577 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:35:23,577 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:35 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:35:24,432 | INFO     | async_wrapper       :137  | handle_message executed in 0.858 seconds
+2025-09-01 17:39:03,622 | INFO     | main                :226  | 🛑 Bot stopped by user
+2025-09-01 17:39:51,256 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:39:51,256 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:39:51,257 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:39:51,257 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:39:55,016 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:39:55,021 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:39:55,021 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:39:55,024 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:39:55,026 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:39:56,553 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:39:56,554 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:39:58,621 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:39:59,107 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:39:59,108 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:39:59,593 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:40:00,086 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:40:00,585 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:40:01,051 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:40:01,059 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:40:01,061 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:40:01,062 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:40:01,062 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:40:01,066 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:40:01,082 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-01 17:40:01,576 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:40:01,577 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-01 17:40:02,185 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-01 17:40:02,186 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:40:02,186 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:40:02,186 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:40:02,187 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:40:02,187 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-01 17:40:02,187 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-01 17:40:02,187 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-01 17:40:02,187 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:40:02,657 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-01 17:40:02,658 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:40:02,658 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-01 17:40:08,793 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'hi'
+2025-09-01 17:40:08,794 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'hi'
+2025-09-01 17:40:08,795 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:40:08,797 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:40:08,797 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:40 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:40:09,443 | INFO     | async_wrapper       :137  | handle_message executed in 0.649 seconds
+2025-09-01 17:40:18,528 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'wassup bro'
+2025-09-01 17:40:18,529 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'wassup bro'
+2025-09-01 17:40:18,529 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:40:18,530 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:40:18,531 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:40 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:40:19,153 | INFO     | async_wrapper       :137  | handle_message executed in 0.625 seconds
+2025-09-01 17:40:56,644 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'hi'
+2025-09-01 17:40:56,646 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'hi'
+2025-09-01 17:40:56,646 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:40:56,646 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:40:56,646 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:40 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:40:57,332 | INFO     | async_wrapper       :137  | handle_message executed in 0.688 seconds
+2025-09-01 17:40:59,473 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'how are u'
+2025-09-01 17:40:59,474 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'how are u'
+2025-09-01 17:40:59,474 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:40:59,475 | INFO     | handle_message      :203  | 🤖 Using REAL AI for casual conversation from user 1201911108: how are u
+2025-09-01 17:40:59,477 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:41:01,908 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:41:01,908 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:41:01,908 | INFO     | handle_message      :213  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:41:02,299 | INFO     | async_wrapper       :137  | handle_message executed in 2.826 seconds
+2025-09-01 17:41:03,579 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'cool'
+2025-09-01 17:41:03,580 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'cool'
+2025-09-01 17:41:03,580 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:41:03,580 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:41:03,581 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:41 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:41:04,006 | INFO     | async_wrapper       :137  | handle_message executed in 0.427 seconds
+2025-09-01 17:41:08,335 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'cool bro'
+2025-09-01 17:41:08,335 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'cool bro'
+2025-09-01 17:41:08,335 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:41:08,335 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:41:08,335 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:41 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:41:08,709 | INFO     | async_wrapper       :137  | handle_message executed in 0.373 seconds
+2025-09-01 17:41:16,052 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'thanks'
+2025-09-01 17:41:16,053 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'thanks'
+2025-09-01 17:41:16,053 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:41:16,054 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:41:16,054 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:41 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:41:16,722 | INFO     | async_wrapper       :137  | handle_message executed in 0.670 seconds
+2025-09-01 17:41:20,035 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'thankyou'
+2025-09-01 17:41:20,036 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'thankyou'
+2025-09-01 17:41:20,037 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:41:20,037 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:41:20,037 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:41 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:41:20,376 | INFO     | async_wrapper       :137  | handle_message executed in 0.341 seconds
+2025-09-01 17:41:31,032 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'this is evening'
+2025-09-01 17:41:31,032 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'this is evening'
+2025-09-01 17:41:31,033 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:41:31,033 | INFO     | handle_message      :203  | 🤖 Using REAL AI for casual conversation from user 1201911108: this is evening
+2025-09-01 17:41:36,554 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:41:36,556 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:41:36,556 | INFO     | handle_message      :213  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:41:37,185 | INFO     | async_wrapper       :137  | handle_message executed in 6.153 seconds
+2025-09-01 17:42:03,908 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'cool bruh'
+2025-09-01 17:42:03,909 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'cool bruh'
+2025-09-01 17:42:03,909 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:42:03,909 | INFO     | handle_message      :160  | 💬 Responding to casual greeting from user 1201911108
+2025-09-01 17:42:03,909 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:42 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:42:04,575 | INFO     | async_wrapper       :137  | handle_message executed in 0.667 seconds
+2025-09-01 17:42:18,606 | INFO     | purchase_command    :149  | 📦 Purchase command called by user 1201911108
+2025-09-01 17:42:28,305 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'Supplier: ABC Medical Supplies
+Location: Lower Par...'
+2025-09-01 17:42:28,306 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'Supplier: ABC Medical Supplies
+Location: Lower Parel
+Items: 2 boxes + 5 bottles
+Amount: ₹18000
+Remarks: Delivered new stock'
+2025-09-01 17:42:28,306 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:42:28,307 | INFO     | handle_message      :232  | 📊 Processing Purchase entry for user 1201911108
+2025-09-01 17:42:28,308 | DEBUG    | process_input       :67   | 🔍 Processing input: 'Supplier: ABC Medical Supplies
+Location: Lower Par...'
+2025-09-01 17:42:28,309 | DEBUG    | process_input       :83   | ✅ Input passed validation - ready for AI processing
+2025-09-01 17:42:28,310 | DEBUG    | handle_message      :272  | 🔄 Attempting strict format parsing for user 1201911108
+2025-09-01 17:42:28,310 | WARNING  | handle_message      :298  | ⚠️ Strict format parsing failed for user 1201911108: list index out of range
+2025-09-01 17:42:28,986 | INFO     | handle_message      :301  | 🤖 Initiating Gemini AI parsing for user 1201911108 (input pre-validated)
+2025-09-01 17:42:32,063 | INFO     | extract_with_gemini :280  | ✅ Transaction parsed successfully using primary key
+2025-09-01 17:42:32,064 | INFO     | handle_message      :324  | ✅ Gemini parsing successful for user 1201911108: {'client': 'ABC Medical Supplies', 'location': 'Lower Parel', 'orders': 7, 'amount': 18000, 'remarks': 'Delivered new stock', 'type': 'Purchase', 'date': datetime.datetime(2025, 9, 1, 17, 42, 32, 64926)}
+2025-09-01 17:42:32,064 | DEBUG    | get_location_for_entry:319  | 📍 Location retrieved for entry: Kalbadevi, Mumbai City
+2025-09-01 17:42:32,064 | INFO     | handle_message      :344  | 📍 GPS location available for user 1201911108: Kalbadevi, Mumbai City
+2025-09-01 17:42:32,064 | INFO     | handle_message      :354  | 📍 Enhanced entry with live position for user 1201911108: Kalbadevi, Mumbai City
+2025-09-01 17:42:32,064 | DEBUG    | handle_message      :358  | 🔍 Validating entry data for user 1201911108: {'client': 'ABC Medical Supplies', 'location': 'Lower Parel', 'orders': 7, 'amount': 18000, 'remarks': 'Delivered new stock', 'type': 'Purchase', 'date': datetime.datetime(2025, 9, 1, 17, 42, 32, 64926), 'live_position': 'Kalbadevi, Mumbai City'}
+2025-09-01 17:42:32,064 | INFO     | handle_message      :367  | ✅ Entry validation passed for user 1201911108
+2025-09-01 17:42:32,072 | INFO     | handle_message      :398  | 💾 Preparing to save entry 1213ffc6 for user 1201911108 to database
+2025-09-01 17:42:32,073 | DEBUG    | handle_message      :399  | 📄 Row data: ['1213ffc6', '01-09-2025', 'Vishesh Sanghvi', 'Purchase', 'ABC Medical Supplies', 'Lower Parel', 7.0, 18000.0, 'Delivered new stock', 1201911108, '17:42', 'yugrow', '2025-09-01T17:42:32.072420', '2025-09-01T17:42:32.072420', 'Kalbadevi, Mumbai City']
+2025-09-01 17:42:32,073 | INFO     | handle_message      :403  | 🔄 Attempting to save entry 1213ffc6 to company sheet...
+2025-09-01 17:42:32,492 | INFO     | append_row_to_company:144  | 📝 Successfully appended row to yugrow sheet: 1213ffc6
+2025-09-01 17:42:32,493 | INFO     | sync_wrapper        :154  | append_row_to_company executed in 0.420 seconds
+2025-09-01 17:42:32,494 | INFO     | handle_message      :409  | ✅ Successfully saved entry 1213ffc6 to yugrow sheet
+2025-09-01 17:42:32,495 | INFO     | handle_message      :417  | 📤 Sending AI-enhanced confirmation message to user 1201911108 for entry 1213ffc6
+2025-09-01 17:42:32,869 | INFO     | handle_message      :450  | ✅ Entry logged successfully for user 1201911108: 1213ffc6 - Amount: ₹18,000.0
+2025-09-01 17:42:32,870 | INFO     | handle_message      :451  | 📊 Transaction summary - User: 1201911108, Type: Purchase, Client: ABC Medical Supplies, Amount: ₹18,000.0
+2025-09-01 17:42:32,871 | INFO     | async_wrapper       :137  | handle_message executed in 4.565 seconds
+2025-09-01 17:43:19,717 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:43:19,717 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:43:19,718 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:43:19,718 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:43:22,954 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:43:22,959 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:43:22,960 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:43:22,962 | INFO     | __init__            :88   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:43:22,963 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:43:24,343 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:43:24,344 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:43:26,306 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:43:26,781 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:43:26,781 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:43:27,270 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:43:27,749 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:43:28,259 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:43:28,737 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:43:28,742 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:43:28,745 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:43:28,746 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:43:28,746 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:43:28,751 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:43:28,767 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-01 17:43:29,276 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:43:29,276 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-01 17:43:30,154 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-01 17:43:30,155 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:43:30,156 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:43:30,157 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:43:30,158 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:43:30,158 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-01 17:43:30,159 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-01 17:43:30,159 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-01 17:43:30,159 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:43:30,549 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-01 17:43:30,549 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:43:30,549 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-01 17:43:32,581 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'hii baby'
+2025-09-01 17:43:32,582 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'hii baby'
+2025-09-01 17:43:32,582 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:43:32,583 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: hii baby
+2025-09-01 17:43:32,583 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:43:35,530 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:43:35,530 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:43:35,531 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:43:35,862 | INFO     | async_wrapper       :137  | handle_message executed in 3.281 seconds
+2025-09-01 17:43:43,219 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'cool'
+2025-09-01 17:43:43,220 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'cool'
+2025-09-01 17:43:43,220 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:43:43,221 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: cool
+2025-09-01 17:43:48,503 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:43:48,503 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:43:48,503 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:43:49,201 | INFO     | async_wrapper       :137  | handle_message executed in 5.982 seconds
+2025-09-01 17:43:59,890 | INFO     | start_command       :31   | 🚀 Start command called by user 1201911108 (Vishesh Sanghvi)
+2025-09-01 17:43:59,891 | INFO     | generate_greeting_response:239  | 🕐 Greeting generated at 17:43 (Hour: 17) -> 🌆 Good evening!
+2025-09-01 17:44:00,537 | INFO     | start_command       :95   | ✅ Enhanced start command completed for user 1201911108
+2025-09-01 17:44:04,274 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'start then'
+2025-09-01 17:44:04,275 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'start then'
+2025-09-01 17:44:04,275 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:44:04,275 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: start then
+2025-09-01 17:44:07,238 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:44:07,238 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:44:07,239 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:44:07,881 | INFO     | async_wrapper       :137  | handle_message executed in 3.607 seconds
+2025-09-01 17:44:18,899 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'give me all sorrts of commands i can use on this'
+2025-09-01 17:44:18,900 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'give me all sorrts of commands i can use on this'
+2025-09-01 17:44:18,900 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:44:18,900 | WARNING  | handle_message      :206  | ⚠️ User 1201911108 hasn't selected log type yet
+2025-09-01 17:44:19,596 | INFO     | async_wrapper       :137  | handle_message executed in 0.697 seconds
+2025-09-01 17:44:22,691 | INFO     | sales_command       :102  | 📊 Sales command called by user 1201911108 (Vishesh Sanghvi)
+2025-09-01 17:44:22,692 | DEBUG    | sales_command       :105  | 🔧 Set user 1201911108 context to 'Sales' mode
+2025-09-01 17:44:43,707 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'nice one bruh'
+2025-09-01 17:44:43,708 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'nice one bruh'
+2025-09-01 17:44:43,708 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:44:43,710 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: nice one bruh
+2025-09-01 17:44:49,182 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:44:49,183 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:44:49,183 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:44:49,833 | INFO     | async_wrapper       :137  | handle_message executed in 6.126 seconds
+2025-09-01 17:44:53,129 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'help'
+2025-09-01 17:44:53,130 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'help'
+2025-09-01 17:44:53,131 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:44:53,131 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: help
+2025-09-01 17:44:58,132 | INFO     | add_to_conversation_memory:109  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:44:58,133 | INFO     | generate_intelligent_conversation:580  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:44:58,134 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:44:58,772 | INFO     | async_wrapper       :137  | handle_message executed in 5.643 seconds
+2025-09-01 17:48:43,064 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:48:43,065 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:48:43,065 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:48:43,065 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:48:43,066 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-01 17:48:43,070 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:48:43,071 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:48:48,209 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:48:48,212 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:48:50,910 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:48:51,445 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:48:51,445 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:48:51,826 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:48:52,301 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:48:52,675 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:48:53,136 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:48:53,197 | INFO     | __init__            :36   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-09-01 17:48:53,675 | INFO     | get_company_records :177  | 📊 Retrieved 12 records from yugrow sheet
+2025-09-01 17:48:53,675 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.478 seconds
+2025-09-01 17:49:05,268 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-01 17:49:05,268 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-01 17:49:05,268 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-01 17:49:05,269 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-01 17:49:08,201 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-01 17:49:08,203 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-01 17:49:08,203 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-01 17:49:08,214 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-01 17:49:08,214 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-01 17:49:08,214 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-01 17:49:08,216 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-01 17:49:09,548 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-01 17:49:09,549 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-01 17:49:11,515 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-01 17:49:11,978 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-01 17:49:11,979 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-01 17:49:12,453 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-01 17:49:12,952 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-01 17:49:13,398 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-01 17:49:13,864 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-01 17:49:13,869 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-01 17:49:13,872 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:49:13,874 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-01 17:49:13,874 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-01 17:49:13,880 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-01 17:49:13,896 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-01 17:49:14,397 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-01 17:49:14,398 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-01 17:49:15,035 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-01 17:49:15,035 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-01 17:49:15,036 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-01 17:49:15,036 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-01 17:49:15,036 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-01 17:49:15,037 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-01 17:49:15,037 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-01 17:49:15,037 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-01 17:49:15,037 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-01 17:49:15,629 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-01 17:49:15,629 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-01 17:49:15,629 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-01 17:49:25,282 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'cool bruh'
+2025-09-01 17:49:25,283 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'cool bruh'
+2025-09-01 17:49:25,283 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:49:25,284 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: cool bruh
+2025-09-01 17:49:25,286 | INFO     | __init__            :75   | 🛡️ Enhanced Smart Rate Limiter initialized with conservative limits
+2025-09-01 17:49:26,156 | INFO     | __init__            :36   | 🔥 Advanced Analytics Engine initialized with multi-user support
+2025-09-01 17:49:26,549 | INFO     | get_company_records :177  | 📊 Retrieved 12 records from yugrow sheet
+2025-09-01 17:49:26,564 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.407 seconds
+2025-09-01 17:49:29,471 | INFO     | add_to_conversation_memory:118  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:49:29,474 | INFO     | generate_intelligent_conversation:590  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:49:29,475 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:49:30,106 | INFO     | async_wrapper       :137  | handle_message executed in 4.824 seconds
+2025-09-01 17:49:33,605 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'thanks man'
+2025-09-01 17:49:33,605 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'thanks man'
+2025-09-01 17:49:33,606 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:49:33,606 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: thanks man
+2025-09-01 17:49:34,010 | INFO     | get_company_records :177  | 📊 Retrieved 12 records from yugrow sheet
+2025-09-01 17:49:34,011 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.406 seconds
+2025-09-01 17:49:36,432 | INFO     | add_to_conversation_memory:118  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:49:36,433 | INFO     | generate_intelligent_conversation:590  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:49:36,433 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:49:37,093 | INFO     | async_wrapper       :137  | handle_message executed in 3.488 seconds
+2025-09-01 17:49:47,387 | INFO     | handle_message      :122  | 📨 Message received from user 1201911108 (Vishesh): 'yeah sure'
+2025-09-01 17:49:47,388 | DEBUG    | handle_message      :123  | 🔍 Full message content: 'yeah sure'
+2025-09-01 17:49:47,389 | DEBUG    | handle_message      :124  | 👤 User details: ID=1201911108, Username=None, Name=Vishesh Sanghvi
+2025-09-01 17:49:47,389 | INFO     | handle_message      :181  | 🤖 Using REAL AI for casual conversation from user 1201911108: yeah sure
+2025-09-01 17:49:47,857 | INFO     | get_company_records :177  | 📊 Retrieved 12 records from yugrow sheet
+2025-09-01 17:49:47,859 | INFO     | sync_wrapper        :154  | get_company_records executed in 0.469 seconds
+2025-09-01 17:49:52,705 | INFO     | add_to_conversation_memory:118  | 💭 Added conversation to memory for user 1201911108
+2025-09-01 17:49:52,705 | INFO     | generate_intelligent_conversation:590  | 🤖 Generated intelligent conversation response with context using secondary
+2025-09-01 17:49:52,705 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
+2025-09-01 17:49:53,369 | INFO     | async_wrapper       :137  | handle_message executed in 5.982 seconds
+2025-09-01 17:50:11,184 | INFO     | main                :226  | 🛑 Bot stopped by user

@@ -13,15 +13,43 @@ from typing import Dict, List, Any, Optional
 from logger import logger
 
 class AIResponseEngine:
-    """🧠 AI-powered response generation for enhanced user experience"""
+    """🧠 AI-powered response generation with conversation memory"""
     
     def __init__(self):
+        # Conversation memory system - stores last 3 messages per user
+        self.conversation_memory = {}  # user_id -> list of last messages
+        self.max_memory_per_user = 3
+        
+        # User context tracking
+        self.user_contexts = {}  # user_id -> context info
+        
+        # Initialize context engine for comprehensive AI understanding
+        try:
+            from ai_context import ai_context_engine
+            self.context_engine = ai_context_engine
+            logger.info("🧠 AI Context Engine integrated for intelligent responses")
+        except Exception as e:
+            logger.warning(f"⚠️ Context engine unavailable: {e}")
+            self.context_engine = None
+        
         self.response_templates = {
             'greeting': [
                 "👋 Hello! Ready to track some business today?",
                 "🌟 Welcome back! Let's make today productive!",
                 "💼 Hi there! What business would you like to log?",
                 "🚀 Great to see you! Ready for some sales tracking?"
+            ],
+            'casual_conversation': [
+                "😊 Thanks for chatting! I'm here whenever you need business help.",
+                "🤖 Always happy to assist with your performance tracking!",
+                "💬 I enjoy our conversations! Let me know how I can help with business.",
+                "🌟 Great talking with you! Ready for some analytics when you are!"
+            ],
+            'time_acknowledgment': [
+                "⏰ You're absolutely right about the time!",
+                "🕐 Yes, time awareness is important for business!",
+                "⏱️ Good observation! Time management matters in business.",
+                "🌅 Time flies when you're being productive!"
             ],
             'success_sales': [
                 "🎉 Excellent work! Another successful sale recorded!",
@@ -66,7 +94,59 @@ class AIResponseEngine:
                 "🌟 Territory expansion - excellent business development!"
             ]
         }
-        logger.info("🤖 AI Response Engine initialized")
+        logger.info("🤖 AI Response Engine initialized with conversation memory")
+    
+    def add_to_conversation_memory(self, user_id: int, user_message: str, bot_response: str):
+        """Add conversation to memory for context awareness"""
+        try:
+            if user_id not in self.conversation_memory:
+                self.conversation_memory[user_id] = []
+            
+            # Add new conversation entry
+            conversation_entry = {
+                "timestamp": datetime.datetime.now().isoformat(),
+                "user_message": user_message,
+                "bot_response": bot_response
+            }
+            
+            self.conversation_memory[user_id].append(conversation_entry)
+            
+            # Keep only last 3 conversations
+            if len(self.conversation_memory[user_id]) > self.max_memory_per_user:
+                self.conversation_memory[user_id] = self.conversation_memory[user_id][-self.max_memory_per_user:]
+            
+            logger.info(f"💭 Added conversation to memory for user {user_id}")
+            
+        except Exception as e:
+            logger.error(f"❌ Error adding to conversation memory: {e}")
+    
+    def get_conversation_context(self, user_id: int) -> str:
+        """Get formatted conversation context for AI"""
+        try:
+            if user_id not in self.conversation_memory or not self.conversation_memory[user_id]:
+                return "No previous conversation context."
+            
+            context_parts = []
+            for i, conv in enumerate(self.conversation_memory[user_id], 1):
+                context_parts.append(f"Message {i}: User said '{conv['user_message']}' -> Bot responded '{conv['bot_response'][:100]}...'")
+            
+            return "Previous conversation:\n" + "\n".join(context_parts)
+            
+        except Exception as e:
+            logger.error(f"❌ Error getting conversation context: {e}")
+            return "No conversation context available."
+    
+    def update_user_context(self, user_id: int, context_info: dict):
+        """Update user context for better personalization"""
+        try:
+            if user_id not in self.user_contexts:
+                self.user_contexts[user_id] = {}
+            
+            self.user_contexts[user_id].update(context_info)
+            logger.info(f"📝 Updated context for user {user_id}")
+            
+        except Exception as e:
+            logger.error(f"❌ Error updating user context: {e}")
     
     def _clean_and_parse_json(self, response_text: str) -> dict | None:
         """Clean and parse JSON response with enhanced error handling"""
@@ -143,21 +223,30 @@ class AIResponseEngine:
         return insights
     
     def generate_greeting_response(self, user_name: str = None, time_of_day: str = None) -> str:
-        """Generate personalized greeting based on context"""
+        """Generate personalized greeting based on current time (IST timezone aware)"""
         try:
             base_greeting = random.choice(self.response_templates['greeting'])
             
-            # Add time-based greeting
+            # Add time-based greeting with improved logic
             if not time_of_day:
-                current_hour = datetime.datetime.now().hour
+                # Get current time and log it for debugging
+                now = datetime.datetime.now()
+                current_hour = now.hour
+                current_time = now.strftime("%H:%M")
+                
+                # Enhanced time-based greetings for Indian context
                 if 5 <= current_hour < 12:
                     time_greeting = "🌅 Good morning!"
-                elif 12 <= current_hour < 17:
+                elif 12 <= current_hour < 16:
                     time_greeting = "☀️ Good afternoon!"
-                elif 17 <= current_hour < 21:
+                elif 16 <= current_hour < 21:
                     time_greeting = "🌆 Good evening!"
                 else:
-                    time_greeting = "🌙 Working late tonight?"
+                    time_greeting = "🌙 Good night!"
+                
+                # Debug logging to track greeting generation
+                logger.info(f"🕐 Greeting generated at {current_time} (Hour: {current_hour}) -> {time_greeting}")
+                
             else:
                 time_greeting = time_of_day
             
@@ -414,10 +503,120 @@ Return JSON with:
         """Generate contextual response using templates"""
         if context == "greeting":
             return random.choice(self.response_templates['greeting'])
+        elif context == "casual_conversation":
+            return random.choice(self.response_templates['casual_conversation'])
+        elif context == "time_acknowledgment":
+            return random.choice(self.response_templates['time_acknowledgment'])
         elif context == "encouragement":
             return random.choice(self.response_templates['encouragement'])
         else:
             return "I'm here to help with your business tracking!"
+
+    def generate_intelligent_conversation(self, user_message: str, user_id: int, user_name: str = None, context: str = None) -> str:
+        """Generate truly intelligent conversation using Gemini AI"""
+        try:
+            # Import Gemini functionality
+            from gemini_parser import smart_api_manager
+            from smart_rate_limiter import rate_limiter
+            
+            # Get comprehensive context for intelligent response
+            conversation_context = self.get_conversation_context(user_id)
+            
+            # Get complete system context if available
+            if self.context_engine:
+                complete_context = self.context_engine.get_complete_context(user_id, user_name, conversation_context)
+            else:
+                # Fallback context
+                complete_context = f"""
+BASIC CONTEXT:
+System: Performance Tracker by Vishesh Sanghvi (MSc Big Data Analytics)
+User: {user_name} (ID: {user_id})
+Conversation: {conversation_context}
+Time: {datetime.datetime.now().strftime('%H:%M')}
+"""
+            
+            # Create enhanced conversation prompt with complete context
+            conversation_prompt = f"""
+{complete_context}
+
+CURRENT USER MESSAGE: "{user_message}"
+
+IMPORTANT INSTRUCTIONS:
+1. You have complete knowledge of the Performance Tracker system, user's business data, and conversation history
+2. Provide contextual responses that reference relevant business insights when appropriate
+3. Use the conversation memory to maintain continuity
+4. Show understanding of the user's business context (company, recent activity, clients)
+5. Be helpful, intelligent, and naturally conversational
+6. Reference specific business features when relevant (charts, analytics, multi-company, GPS tracking)
+7. Keep responses under 150 words but make them meaningful and context-aware
+
+Generate a natural, intelligent response that demonstrates deep understanding of the system and user context.
+"""
+
+            # Get Gemini model for conversation
+            model, key_used = smart_api_manager.get_model_for_task("casual_conversation")
+
+            # Get Gemini model for conversation
+            model, key_used = smart_api_manager.get_model_for_task("casual_conversation")
+            
+            # Check rate limiting
+            if not rate_limiter.can_use_key(key_used):
+                available_keys = rate_limiter.get_available_keys()
+                if available_keys:
+                    alternative_key = available_keys[0]
+                    model = smart_api_manager.models[alternative_key]
+                    key_used = alternative_key
+                    logger.info(f"� Conversation: Switched to {key_used} due to rate limiting")
+                else:
+                    logger.warning("🚫 All API keys rate limited, using fallback conversation")
+                    fallback_response = self._generate_fallback_conversation(user_message, user_name, conversation_context)
+                    self.add_to_conversation_memory(user_id, user_message, fallback_response)
+                    return fallback_response
+            
+            # Generate response with Gemini
+            response = model.generate_content(conversation_prompt)
+            ai_response = response.text.strip()
+            
+            # Record successful request
+            rate_limiter.record_request(key_used, True)
+            
+            # Clean up the response
+            if ai_response.startswith('"') and ai_response.endswith('"'):
+                ai_response = ai_response[1:-1]
+            
+            # Add to conversation memory
+            self.add_to_conversation_memory(user_id, user_message, ai_response)
+            
+            logger.info(f"🤖 Generated intelligent conversation response with context using {key_used}")
+            return ai_response
+            
+        except Exception as e:
+            logger.error(f"� Intelligent conversation generation failed: {e}")
+            return self._generate_fallback_conversation(user_message, user_name)
+    
+    def _generate_fallback_conversation(self, user_message: str, user_name: str = None, conversation_context: str = None) -> str:
+        """Enhanced fallback conversation with context awareness"""
+        message_lower = user_message.lower()
+        
+        # Try to use context if available
+        context_aware = ""
+        if conversation_context and "Previous conversation:" in conversation_context:
+            if "tired" in conversation_context.lower() and any(word in message_lower for word in ['good', 'morning', 'better']):
+                context_aware = "Hope you're feeling more refreshed now! "
+            elif "evening" in conversation_context.lower() and "thank" in message_lower:
+                context_aware = "You're welcome! Hope you're enjoying the evening! "
+        
+        # Generate contextual response
+        if any(word in message_lower for word in ['evening', 'afternoon', 'morning', 'time']):
+            return f"{context_aware}You're absolutely right about the time{f' {user_name}' if user_name else ''}! 🕐 Perfect time to track some business performance!"
+        elif any(word in message_lower for word in ['thank', 'thanks']):
+            return f"{context_aware}You're very welcome{f' {user_name}' if user_name else ''}! 😊 Always here to help with your business tracking!"
+        elif any(word in message_lower for word in ['bye', 'goodbye']):
+            return f"{context_aware}Take care{f' {user_name}' if user_name else ''}! 👋 Come back anytime for business insights!"
+        elif any(word in message_lower for word in ['how are you', 'how is everything']):
+            return f"{context_aware}I'm doing great, thanks for asking{f' {user_name}' if user_name else ''}! 🤖 Ready to help analyze your business performance!"
+        else:
+            return f"{context_aware}Thanks for chatting{f' {user_name}' if user_name else ''}! 💬 I'm here whenever you need business tracking assistance!"
 
 # Global instance
 ai_response_engine = AIResponseEngine()
