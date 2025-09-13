@@ -4325,3 +4325,43 @@ Location: Lower Par...'
 2025-09-01 17:49:52,705 | INFO     | handle_message      :191  | ✅ Generated intelligent AI response with memory for casual conversation
 2025-09-01 17:49:53,369 | INFO     | async_wrapper       :137  | handle_message executed in 5.982 seconds
 2025-09-01 17:50:11,184 | INFO     | main                :226  | 🛑 Bot stopped by user
+2025-09-02 16:31:50,200 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-02 16:31:50,204 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-02 16:31:50,204 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-02 16:31:50,204 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-02 16:31:53,447 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-02 16:31:53,457 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-02 16:31:53,457 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-02 16:31:53,473 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-02 16:31:53,474 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-02 16:31:53,475 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-02 16:31:53,480 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-02 16:31:55,374 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-02 16:31:55,376 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-02 16:31:57,406 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-02 16:31:57,890 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-02 16:31:57,890 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-02 16:31:58,396 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-02 16:31:58,840 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-02 16:31:59,346 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-02 16:31:59,848 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-02 16:31:59,869 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-02 16:31:59,877 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-02 16:31:59,878 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-02 16:31:59,878 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-02 16:31:59,902 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-02 16:31:59,923 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-02 16:32:00,525 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-02 16:32:00,527 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-02 16:32:01,094 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-02 16:32:01,095 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-02 16:32:01,095 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-02 16:32:01,096 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-02 16:32:01,096 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-02 16:32:01,096 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-02 16:32:01,096 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-02 16:32:01,096 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-02 16:32:01,096 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-02 16:32:01,532 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-02 16:32:01,532 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-02 16:32:01,532 | INFO     | main                :219  | 🔄 Starting bot polling...
