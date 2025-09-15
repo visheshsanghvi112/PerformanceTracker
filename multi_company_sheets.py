@@ -26,7 +26,7 @@ class MultiCompanySheetManager:
             
             # Try to load credentials
             try:
-                self.creds = ServiceAccountCredentials.from_json_keyfile_name('yugrow-dd1d5-6676a7b2d2ea.json', self.scope)
+                self.creds = ServiceAccountCredentials.from_json_keyfile_name('yugrow-dd1d5-f97f321827f2.json', self.scope)
                 logger.info("✅ Google Sheets credentials loaded")
             except FileNotFoundError:
                 logger.warning("⚠️ Google Sheets credentials file not found - running in offline mode")

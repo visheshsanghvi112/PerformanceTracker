@@ -4365,3 +4365,209 @@ Location: Lower Par...'
 2025-09-02 16:32:01,532 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
 2025-09-02 16:32:01,532 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
 2025-09-02 16:32:01,532 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-15 11:54:36,569 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 11:54:36,569 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 11:54:36,573 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 11:54:36,573 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:01:59,716 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 12:01:59,717 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 12:01:59,717 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 12:01:59,718 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:02:03,076 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-15 12:02:03,080 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-15 12:02:03,081 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-15 12:02:03,083 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-15 12:02:03,083 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-15 12:02:03,084 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-15 12:02:03,085 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-15 12:02:04,048 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-15 12:02:04,049 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-15 12:02:05,927 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-15 12:02:06,321 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-15 12:02:06,321 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-15 12:02:06,713 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-15 12:02:07,086 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-15 12:02:07,485 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-15 12:02:07,885 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-15 12:02:07,896 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-15 12:02:07,901 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:02:07,902 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:02:07,903 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:02:07,908 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-15 12:02:07,917 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-15 12:02:08,332 | WARNING  | check_system_health :102  | ⚠️ Required file missing: yugrow-dd1d5-010a6b203565.json
+2025-09-15 12:02:08,333 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-15 12:02:08,595 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-15 12:02:08,596 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-15 12:02:08,596 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-15 12:02:08,597 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-15 12:02:08,597 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-15 12:02:08,597 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-15 12:02:08,597 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-15 12:02:08,597 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-15 12:02:08,597 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-15 12:02:08,997 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-15 12:02:08,997 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-15 12:02:08,997 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-15 12:02:14,821 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:02:20,740 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:02:27,919 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:02:33,979 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:02:43,223 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:02:57,104 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:03:17,586 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:03:39,593 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:04:10,611 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:04:45,476 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:05:20,364 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:05:55,218 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:06:30,464 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:07:05,387 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:07:40,212 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:08:15,101 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:08:50,042 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:09:24,924 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:09:59,853 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:10:07,562 | INFO     | main                :226  | 🛑 Bot stopped by user
+2025-09-15 12:10:11,229 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 12:10:11,229 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 12:10:11,229 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 12:10:11,229 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:10:11,415 | WARNING  | <module>            :14   | ⚠️ Google Sheets credentials file not found - legacy sheets disabled
+2025-09-15 12:10:11,416 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-15 12:10:11,417 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-15 12:10:11,419 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-15 12:10:11,419 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-15 12:10:11,420 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-15 12:10:11,421 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-15 12:10:12,161 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-15 12:10:12,161 | WARNING  | __init__            :32   | ⚠️ Google Sheets credentials file not found - running in offline mode
+2025-09-15 12:10:12,164 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-15 12:10:12,168 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:10:12,169 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:10:12,170 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:10:12,173 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-15 12:10:12,179 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-15 12:10:12,179 | WARNING  | check_sheet_connection:103  | ⚠️ Google Sheets not available (offline mode)
+2025-09-15 12:10:12,179 | WARNING  | check_system_health :91   | ⚠️ Google Sheets connection failed - some features may not work
+2025-09-15 12:10:12,180 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-15 12:10:12,475 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-15 12:10:12,476 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-15 12:10:12,476 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-15 12:10:12,477 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-15 12:10:12,477 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-15 12:10:12,477 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-15 12:10:12,477 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-15 12:10:12,477 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-15 12:10:12,477 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-15 12:10:12,478 | WARNING  | check_sheet_connection:103  | ⚠️ Google Sheets not available (offline mode)
+2025-09-15 12:10:12,478 | DEBUG    | main                :215  |    📊 Google Sheets: Disabled
+2025-09-15 12:10:12,478 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-15 12:10:12,478 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-15 12:10:34,702 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:11:09,668 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:11:44,613 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:12:19,556 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:12:22,615 | INFO     | main                :226  | 🛑 Bot stopped by user
+2025-09-15 12:12:24,781 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 12:12:24,782 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 12:12:24,782 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 12:12:24,783 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:12:28,180 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-15 12:12:28,180 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-15 12:12:28,180 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-15 12:12:28,180 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-15 12:12:28,180 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-15 12:12:28,180 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-15 12:12:28,190 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-15 12:12:28,815 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-15 12:12:28,815 | WARNING  | __init__            :32   | ⚠️ Google Sheets credentials file not found - running in offline mode
+2025-09-15 12:12:28,817 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-15 12:12:28,821 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:12:28,821 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:12:28,822 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:12:28,827 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-15 12:12:28,842 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-15 12:12:29,245 | ERROR    | main                :228  | ❌ Fatal error starting bot: cannot access local variable 'required_files' where it is not associated with a value
+2025-09-15 12:12:29,330 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:20:41,248 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 12:20:41,248 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 12:20:41,248 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 12:20:41,250 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:20:44,652 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-15 12:20:44,654 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-15 12:20:44,654 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-15 12:20:44,655 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-15 12:20:44,656 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-15 12:20:44,656 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-15 12:20:44,656 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-15 12:20:45,251 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-15 12:20:45,251 | WARNING  | __init__            :32   | ⚠️ Google Sheets credentials file not found - running in offline mode
+2025-09-15 12:20:45,253 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-15 12:20:45,255 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:20:45,256 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:20:45,256 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:20:45,259 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-15 12:20:45,263 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-15 12:20:45,648 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-15 12:20:45,913 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-15 12:20:45,913 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-15 12:20:45,913 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-15 12:20:45,913 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-15 12:20:45,913 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-15 12:20:45,913 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-15 12:20:45,913 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-15 12:20:45,913 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-15 12:20:45,913 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-15 12:20:46,298 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-15 12:20:46,298 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-15 12:20:46,298 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-15 12:20:52,141 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:20:58,061 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:21:05,244 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:21:11,299 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:21:20,619 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:21:34,513 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:21:54,734 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:22:16,704 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-09-15 12:22:27,076 | INFO     | main                :226  | 🛑 Bot stopped by user
+2025-09-15 12:22:29,247 | INFO     | <module>            :47   | 🚀 [STARTUP] Logging system initialized - Single log file approach
+2025-09-15 12:22:29,247 | INFO     | <module>            :48   | 📁 [CONFIG] Log file location: data\bot.log
+2025-09-15 12:22:29,247 | INFO     | <module>            :49   | 📊 [CONFIG] All log levels (DEBUG/INFO/WARNING/ERROR) go to single file
+2025-09-15 12:22:29,247 | DEBUG    | <module>            :50   | 🔧 [DEBUG] Debug logging is active
+2025-09-15 12:22:31,584 | INFO     | <module>            :12   | ✅ Legacy sheets.py connected to Google Sheets
+2025-09-15 12:22:31,584 | INFO     | _load_user_mappings :68   | 📂 Loaded 1 user mappings
+2025-09-15 12:22:31,585 | INFO     | __init__            :60   | 🏢 Company Manager initialized
+2025-09-15 12:22:31,587 | INFO     | __init__            :18   | 🧠 AI Context Engine initialized with complete system knowledge
+2025-09-15 12:22:31,588 | INFO     | __init__            :30   | 🧠 AI Context Engine integrated for intelligent responses
+2025-09-15 12:22:31,588 | INFO     | __init__            :97   | 🤖 AI Response Engine initialized with conversation memory
+2025-09-15 12:22:31,589 | DEBUG    | __init__            :54   | 🧠 InputProcessor initialized with unified validation and fallback
+2025-09-15 12:22:32,284 | INFO     | __init__            :21   | 🔄 Initializing multi-company Google Sheets connection...
+2025-09-15 12:22:32,284 | INFO     | __init__            :30   | ✅ Google Sheets credentials loaded
+2025-09-15 12:22:33,998 | INFO     | __init__            :48   | ✅ Connected to Google Sheets
+2025-09-15 12:22:34,347 | INFO     | _initialize_company_sheets:77   | 📋 Existing sheets: ['Sheet1', 'JohnLee_Data', 'Yugrow_Data', 'Ambica_Data', 'Baker_Data']
+2025-09-15 12:22:34,347 | INFO     | _initialize_company_sheets:96   | ✅ Sheet JohnLee_Data already exists
+2025-09-15 12:22:34,722 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Yugrow_Data already exists
+2025-09-15 12:22:35,081 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Ambica_Data already exists
+2025-09-15 12:22:35,473 | INFO     | _initialize_company_sheets:96   | ✅ Sheet Baker_Data already exists
+2025-09-15 12:22:35,856 | INFO     | __init__            :61   | 📊 Multi-Company Sheet Manager initialized successfully
+2025-09-15 12:22:35,856 | INFO     | __init__            :27   | 📦 Batch Handler initialized
+2025-09-15 12:22:35,856 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:22:35,856 | INFO     | __init__            :25   | ⚡ Parallel Processor initialized with 4 workers
+2025-09-15 12:22:35,867 | INFO     | cleanup             :257  | ⚡ Parallel processor cleaned up
+2025-09-15 12:22:35,870 | INFO     | __init__            :28   | 📍 Live Position Handler initialized
+2025-09-15 12:22:35,885 | INFO     | check_system_health :82   | 🔍 Performing system health checks...
+2025-09-15 12:22:36,263 | INFO     | check_system_health :104  | ✅ System health check completed
+2025-09-15 12:22:36,554 | INFO     | main                :200  | ⏰ Scheduler initialized successfully
+2025-09-15 12:22:36,554 | INFO     | main                :205  | 🤖 Performance Tracker Bot is starting...
+2025-09-15 12:22:36,554 | INFO     | main                :206  | 📊 Features enabled: Entry logging, AI parsing, Interactive menus, Error handling, Multi-Company Support
+2025-09-15 12:22:36,561 | INFO     | main                :207  | 🔗 Bot token configured: 7977627451...mnzM
+2025-09-15 12:22:36,561 | INFO     | main                :208  | 🔗 Bot is running and ready to accept commands!
+2025-09-15 12:22:36,561 | DEBUG    | main                :211  | 🔧 System Configuration:
+2025-09-15 12:22:36,561 | DEBUG    | main                :212  |    📁 Data directory: data
+2025-09-15 12:22:36,561 | DEBUG    | main                :213  |    🗂️ Log files: bot.log
+2025-09-15 12:22:36,561 | DEBUG    | main                :214  |    🤖 AI Model: Gemini 2.5 Flash
+2025-09-15 12:22:36,919 | DEBUG    | main                :215  |    📊 Google Sheets: Enabled
+2025-09-15 12:22:36,919 | DEBUG    | main                :216  |    🏢 Multi-Company: Enabled (JohnLee, Yugrow Pharmacy, Ambica Pharma, Baker & Davis)
+2025-09-15 12:22:36,919 | INFO     | main                :219  | 🔄 Starting bot polling...
+2025-09-15 12:22:47,186 | ERROR    | error_handler       :110  | Exception while handling an update: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running

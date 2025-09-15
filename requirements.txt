@@ -111,7 +111,7 @@ requests==2.31.0             # HTTP client - API calls, geocoding, external serv
 # Optional advanced AI/ML capabilities - Cutting-edge technology
 # Only install if you need advanced NLP features (adds ~3GB)
 transformers==4.36.2         # Hugging Face transformers - BERT, GPT models, NLP pipeline
-torch==2.1.2                 # PyTorch framework - Deep learning, neural networks
+torch==2.4.1                 # PyTorch framework - Deep learning, neural networks
 datasets==2.16.1             # Hugging Face datasets - ML dataset management
 
 # ===== NATURAL LANGUAGE PROCESSING =====
@@ -136,7 +136,7 @@ uvicorn==0.24.0              # ASGI server - High-performance async web server
 # ===== SECURITY & ENVIRONMENT =====
 # Military-grade security and environment management
 # Zero vulnerabilities detected in security audit
-cryptography==41.0.8         # Cryptographic operations - Secure data handling
+cryptography==42.0.0         # Cryptographic operations - Secure data handling
 certifi==2023.11.17          # SSL certificates - Trusted certificate authority bundle
 
 # ===== IMAGE PROCESSING =====

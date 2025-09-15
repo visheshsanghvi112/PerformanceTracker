@@ -93,7 +93,7 @@ def check_system_health():
     
     # Check if required files exist
     required_files = [
-        'yugrow-dd1d5-010a6b203565.json',  # Google Sheets credentials
+        'yugrow-dd1d5-f97f321827f2.json',  # Google Sheets credentials
         '.env'  # Environment variables
     ]
     
